@@ -1,7 +1,7 @@
 # Contains business logic (validation, processing, rules)
 # Does NOT know about HTTP - only works with Python data
 
-from database.bookings import (
+from database.staff import (
     db_get_all,
     db_get_one,
     db_create,
@@ -14,17 +14,17 @@ def service_get_all():
     return db_get_all()
 
 
-def service_get_one(booking_id):
-    return db_get_one(booking_id)
+def service_get_one(staff_id):
+    return db_get_one(staff_id)
 
 
 def service_create(data):
     return db_create(data)
 
 
-# def service_update(booking_id, data):
-#     return db_update(booking_id, data)
+# def service_update(staff_id, data):
+#     return db_update(staff_id, data)
 
 
-# def service_delete(booking_id):
-#     return db_delete(booking_id)
+# def service_delete(staff_id):
+#     return db_delete(staff_id)

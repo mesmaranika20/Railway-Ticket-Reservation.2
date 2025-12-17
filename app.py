@@ -1,21 +1,13 @@
-#  Starts the API server and initializes the database
-
 from http.server import HTTPServer
-from router import ReservationRouter
+from router import RailwayRouter
 from database.connection import init_database
 
 def run_server():
     init_database()
-    server = HTTPServer(("", 8000), ReservationRouter)
-    print(f"🚄 Server running at http://localhost:8000")
-
-    try:
-        server.serve_forever()
-    except KeyboardInterrupt:
-        print("\nShutting down serve ....")
-    finally:
-        server.server_close()
-        print("Server stopped.")
+    server_address = ("", 8000)
+    httpd = HTTPServer(server_address, RailwayRouter)
+    print("🚀 Server running at http://localhost:8000")
+    httpd.serve_forever()
 
 if __name__ == "__main__":
-            run_server()
+    run_server()

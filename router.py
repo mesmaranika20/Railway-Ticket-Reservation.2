@@ -1,132 +1,176 @@
 # Matches incoming HTTP paths (URLs) to handlers (like a tiny Express/Django router)
 
-
 from datetime import datetime
 from http.server import BaseHTTPRequestHandler
-from urllib.parse import urlparse, parse_qs
+from urllib.parse import urlparse
 
-from controllers.train_controller import (
+from controllers.trains import (
     get_all_trains,
     get_train
+    , create_train
+    # , update_train
+    # , delete_train
 )
 
-from controllers.booking_controller import (
-    get_all_bookings,
-    create_booking,
-    get_booking,
-    update_booking,
-    delete_booking
+from controllers.bookings import (
+     get_all_bookings,
+    get_booking
+     , create_booking
+    # , update_booking
+    # , delete_booking
 )
 
-from controllers.staff_controller import (
-    get_all_staff
+from controllers.staff import (
+    get_all_staff,
+    get_staff
+  , create_staff
+    # , update_staff
+    # , delete_staff
 )
 
 from core.static import serve_static
-from core.responses import send_404, send_json
+from core.responses import send_404
 from core.middleware import add_cors_headers
 
+# FRONTEND_ROUTES = {"/", "/home", "/trains", "/bookings", "/staff", "/admin"}
 
-FRONTEND_ROUTES = {
-    "/": "frontend/pages/index.html",
-    "/schedule": "frontend/pages/schedule.html",
-    "/booking": "frontend/pages/booking.html",
-    "/staff": "frontend/pages/staff.html"
-}
+# def handle_ui_routes(handler, path):
+#     # Catch-all frontend routes
+#     if path in FRONTEND_ROUTES:
+#         serve_static(handler, "frontend/pages/index.html")
+#         return True
+    
+#     if path.endswith(".html"):
+#         stripped = path.replace(".html", "")
+#         if stripped in FRONTEND_ROUTES:
+#             serve_static(handler, "frontend/pages/index.html")
+#             return True
+    
+#     if path.startswith("/frontend/"):
+#         serve_static(handler, path.lstrip("/"))
+#         return True
+    
+#     return False
 
-
-class ReservationRouter(BaseHTTPRequestHandler): 
-
-     # CORS
+class RailwayRouter(BaseHTTPRequestHandler):
+    
     def do_OPTIONS(self):
-        add_cors_headers(self)
+        # Why OPTIONS exists:
+        # Browsers enforce security rules.
         self.send_response(200)
+        add_cors_headers(self)
         self.end_headers()
-
-    def handle_ui_routes(self, path):
-        if path in FRONTEND_ROUTES:
-            serve_static(self, FRONTEND_ROUTES[path])
-            return True
-        return False
-
-
-    # ================= GET =====================
+    
     def do_GET(self):
-        add_cors_headers(self)
         parsed = urlparse(self.path)
         path = parsed.path
-
-        # Frontend pages
-        if self.handle_ui_routes(path):
-            return
-
-        # --- TRAIN API ---
+        
+        # UI Routes
+        # if handle_ui_routes(self, path):
+        #     return
+        
+        # if path in ("/docs", "/docs.html"):
+        #     return serve_static(self, "templates/docs.html")
+        
+        # if path == "/openapi.yaml":
+        #     return serve_static(self, "openapi.yaml")
+        
+        # # Static folder
+        # if path.startswith("/static/"):
+        #     return serve_static(self, path.lstrip("/"))
+        
+        # API: List trains
         if path == "/api/trains":
-            return send_json(self, get_all_trains())
-
+            return get_all_trains(self)
+        
+        # API: Get train by id
         if path.startswith("/api/trains/"):
-            train_id = path.split("/")[-1]
-            return send_json(self, get_train(train_id))
-
-        # --- BOOKING API ---
+            train_id = int(path.split("/")[-1])
+            return get_train(self, train_id)
+        
+        # API: List bookings
         if path == "/api/bookings":
-            return send_json(self, get_all_bookings())
-
+            return get_all_bookings(self)
+        
+        # API: Get booking by id
         if path.startswith("/api/bookings/"):
-            booking_id = path.split("/")[-1]
-            return send_json(self, get_booking(booking_id))
-
-        # --- STAFF API ---
+            booking_id = int(path.split("/")[-1])
+            return get_booking(self, booking_id)
+        
+        # API: List staff
         if path == "/api/staff":
-            return send_json(self, get_all_staff())
-
-        send_404(self)
-
-
-    # ================= POST (CREATE) =====================
+            return get_all_staff(self)
+        
+        # API: Get staff by id
+        if path.startswith("/api/staff/"):
+            staff_id = int(path.split("/")[-1])
+            return get_staff(self, staff_id)
+        
+        return send_404(self)
+    
     def do_POST(self):
-        add_cors_headers(self)
         parsed = urlparse(self.path)
         path = parsed.path
+        
+        # API: Create train
+        if path == "/api/trains":
+            return create_train(self)
+        
+        # API: Create booking
+        if path == "/api/bookings":
+            return create_booking(self)
+        
+        # API: Create staff
+        if path == "/api/staff":
+            return create_staff(self)
+        
+        return send_404(self)
+    
+    # def do_PUT(self):
+    #     parsed = urlparse(self.path)
+    #     path = parsed.path
+        
+    #     # API: Update train
+    #     if path.startswith("/api/trains/"):
+    #         train_id = int(path.split("/")[3])
+    #         return update_train(self, train_id)
+        
+    #     # API: Update booking
+    #     if path.startswith("/api/bookings/"):
+    #         booking_id = int(path.split("/")[3])
+    #         return update_booking(self, booking_id)
+        
+    #     # API: Update staff
+    #     if path.startswith("/api/staff/"):
+    #         staff_id = int(path.split("/")[3])
+    #         return update_staff(self, staff_id)
+        
+    #     return send_404(self)
+    
+    # def do_DELETE(self):
+    #     parsed = urlparse(self.path)
+    #     path = parsed.path
+        
+    #     # API: Delete train
+    #     if path.startswith("/api/trains/"):
+    #         train_id = int(path.split("/")[3])
+    #         return delete_train(self, train_id)
+        
+    #     # API: Cancel booking
+    #     if path.startswith("/api/bookings/"):
+    #         booking_id = int(path.split("/")[3])
+    #         return cancel_booking(self, booking_id)
+        
+    #     # API: Delete staff
+    #     if path.startswith("/api/staff/"):
+    #         staff_id = int(path.split("/")[3])
+    #         return delete_staff(self, staff_id)
+        
+    #     return send_404(self)
 
-        # --- CREATE BOOKING ---
-        if path == "/api/bookings/create":
-            length = int(self.headers["Content-Length"])
-            body = self.rfile.read(length).decode()
-            data = {k: v[0] for k, v in parse_qs(body).items()}
-            return send_json(self, create_booking(data))
-
-        send_404(self)
+    def log_message(self, format, *args):
+        timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        print(f"[{timestamp}] [Server] {format % args}")
 
 
-    # ================= PUT (UPDATE) =====================
-    def do_PUT(self):
-        add_cors_headers(self)
-        parsed = urlparse(self.path)
-        path = parsed.path
-
-        if path.startswith("/api/bookings/") and path.endswith("/update"):
-            booking_id = path.split("/")[-2]
-            length = int(self.headers["Content-Length"])
-            body = self.rfile.read(length).decode()
-            data = {k: v[0] for k, v in parse_qs(body).items()}
-            return send_json(self, update_booking(booking_id, data))
-
-        send_404(self)
-
-
-    # ================= DELETE (DELETE) =====================
-    def do_DELETE(self):
-        add_cors_headers(self)
-        parsed = urlparse(self.path)
-        path = parsed.path
-
-        if path.startswith("/api/bookings/") and path.endswith("/delete"):
-            booking_id = path.split("/")[-2]
-            return send_json(self, delete_booking(booking_id))
-
-        send_404(self)
-
-
-   
    

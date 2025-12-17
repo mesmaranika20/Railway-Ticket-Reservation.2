@@ -1,25 +1,22 @@
-def serve_static(handler, file_path):
+import mimetypes
+from core.responses import send_404
+
+def serve_static(handler, filepath):
     try:
-        with open(file_path, "rb") as f:
+        with open(filepath, "rb") as f:
             content = f.read()
 
+        content_type, _ = mimetypes.guess_type(filepath)
+        if filepath.endswith(".html"):
+            content_type = "text/html"
+        if filepath.endswith(".yaml"):
+            content_type = "text/yaml"
+
         handler.send_response(200)
-
-        if file_path.endswith(".html"):
-            handler.send_header("Content-Type", "text/html")
-        elif file_path.endswith(".css"):
-            handler.send_header("Content-Type", "text/css")
-        elif file_path.endswith(".js"):
-            handler.send_header("Content-Type", "application/javascript")
-        else:
-            handler.send_header("Content-Type", "application/octet-stream")
-
+        handler.send_header("Content-Type", content_type or "application/octet-stream")
         handler.end_headers()
         handler.wfile.write(content)
-        return True
 
-    except FileNotFoundError:
-        handler.send_response(404)
-        handler.end_headers()
-        handler.wfile.write(b"File not found")
-        return False
+    except Exception as e:
+        print("STATIC ERROR:", e)
+        send_404(handler)

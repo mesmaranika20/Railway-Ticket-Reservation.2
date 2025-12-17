@@ -1,44 +1,55 @@
+# Opens a connection to SQLite and returns it for DB operations
+
 import sqlite3
 
 DB_FILE = "railway.db"
 
+
 def get_connection():
     conn = sqlite3.connect(DB_FILE)
-    conn.row_factory = sqlite3.Row   # returns rows as dict-like objects
+    conn.row_factory = sqlite3.Row
     return conn
 
 
 def init_database():
     conn = get_connection()
-    conn.execute("""
-        CREATE TABLE IF NOT EXISTS users (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            name TEXT,
-            email TEXT
-        );
-    """)
 
     conn.execute("""
         CREATE TABLE IF NOT EXISTS trains (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
-            name TEXT,
+            train_name TEXT,
             source TEXT,
             destination TEXT,
-            available_seats INTEGER
-        );
+            departure_time VARCHAR,
+            arrival_time VARCHAR,
+            created_at TEXT,
+            updated_at TEXT
+        )
     """)
 
     conn.execute("""
         CREATE TABLE IF NOT EXISTS bookings (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
-            user_id INTEGER,
             train_id INTEGER,
-            seats INTEGER,
-            FOREIGN KEY(user_id) REFERENCES users(id),
-            FOREIGN KEY(train_id) REFERENCES trains(id)
-        );
+            passenger_name TEXT,
+            seat_number VARCHAR,
+            booking_date VARCHAR,
+            created_at TEXT,
+            updated_at TEXT
+        )
+    """)
+
+    conn.execute("""
+        CREATE TABLE IF NOT EXISTS staff (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            name TEXT,
+            role TEXT,
+            contact TEXT,
+            created_at TEXT,
+            updated_at TEXT
+        )
     """)
 
     conn.commit()
     conn.close()
-    print("✔ Database initialized")
+    print("✓ Database initialized")
