@@ -5,8 +5,8 @@ from database.staff import (
     db_get_all,
     db_get_one,
     db_create,
-    # db_update,
-    # db_delete
+    db_update,
+    db_delete
 )
 
 
@@ -22,9 +22,9 @@ def service_create(data):
     return db_create(data)
 
 
-# def service_update(staff_id, data):
-#     return db_update(staff_id, data)
+def service_update(staff_id, data):
+    return db_update(staff_id, data)
 
 
-# def service_delete(staff_id):
-#     return db_delete(staff_id)
+def service_delete(staff_id):
+    return db_delete(staff_id)

@@ -7,8 +7,8 @@ from services.train_service import (
     service_get_all,
     service_get_one,
     service_create,
-    # service_update,
-    # service_delete
+    service_update,
+    service_delete
 )
 
 
@@ -27,12 +27,12 @@ def create_train(handler):
     return send_json(handler, 201, new_train)
 
 
-# def update_train(handler, train_id):
-#     data = parse_json_body(handler)
-#     updated = service_update(train_id, data)
-#     return send_json(handler, 200, updated) if updated else send_404(handler)
+def update_train(handler, train_id):
+    data = parse_json_body(handler)
+    updated = service_update(train_id, data)
+    return send_json(handler, 200, updated) if updated else send_404(handler)
 
 
-# def delete_train(handler, train_id):
-#     deleted = service_delete(train_id)
-#     return send_json(handler, 200, {"deleted": True}) if deleted else send_404(handler)
+def delete_train(handler, train_id):
+    deleted = service_delete(train_id)
+    return send_json(handler, 200, {"deleted": True}) if deleted else send_404(handler)

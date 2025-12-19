@@ -7,8 +7,8 @@ from services.booking_service import (
     service_get_all,
     service_get_one,
     service_create,
-    # service_update,
-    # service_delete
+    service_update,
+    service_delete
 )
 
 
@@ -27,12 +27,12 @@ def create_booking(handler):
     return send_json(handler, 201, new_booking)
 
 
-# def update_booking(handler, booking_id):
-#     data = parse_json_body(handler)
-#     updated = service_update(booking_id, data)
-#     return send_json(handler, 200, updated) if updated else send_404(handler)
+def update_booking(handler, booking_id):
+    data = parse_json_body(handler)
+    updated = service_update(booking_id, data)
+    return send_json(handler, 200, updated) if updated else send_404(handler)
 
 
-# def delete_booking(handler, booking_id):
-#     deleted = service_delete(booking_id)
-#     return send_json(handler, 200, {"deleted": True}) if deleted else send_404(handler)
+def delete_booking(handler, booking_id):
+    deleted = service_delete(booking_id)
+    return send_json(handler, 200, {"deleted": True}) if deleted else send_404(handler)

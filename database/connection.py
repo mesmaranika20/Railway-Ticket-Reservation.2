@@ -20,8 +20,8 @@ def init_database():
             train_name TEXT,
             source TEXT,
             destination TEXT,
-            departure_time INTEGER,
-            arrival_time INTEGER,
+            departure_time TEXT,
+            arrival_time TEXT,
             created_at TEXT,
             updated_at TEXT
         )
@@ -32,8 +32,8 @@ def init_database():
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             train_id INTEGER,
             passenger_name TEXT,
-            seat_number INTEGER ,
-            booking_date INTEGER ,
+            seat_number TEXT,
+            booking_date TEXT,
             created_at TEXT,
             updated_at TEXT
         )
@@ -44,7 +44,7 @@ def init_database():
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             name TEXT,
             role TEXT,
-            contact INTEGER,
+            contact TEXT,
             created_at TEXT,
             updated_at TEXT
         )

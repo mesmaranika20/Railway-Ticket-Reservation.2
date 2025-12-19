@@ -35,7 +35,7 @@ def db_create(data):
             data["destination"],
             data["departure_time"],
             data["arrival_time"],
-            now,
+            now
         )
     )
     conn.commit()
