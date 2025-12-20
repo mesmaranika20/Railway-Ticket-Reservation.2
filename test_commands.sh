@@ -65,10 +65,10 @@ curl -X POST "https://super-space-disco-x57rvprjvpxqfp447-8000.app.github.dev/ap
 # ------------------------------------------
 
 # F. Update Booking
-curl -X PUT "https://super-space-disco-x57rvprjvpxqfp447-8000.app.github.dev/api/bookings/1" \
+curl -X PUT "https://super-space-disco-x57rvprjvpxqfp447-8000.app.github.dev/api/bookings/2" \
   -H "Content-Type: application/json" \
   -d '{
-    "train_id": 23904,
+    "train_id": 2,
     "passenger_name": "Alisha Patro",
     "seat_number": "S1-73",
     "booking_date": "2025-01-15"
@@ -78,7 +78,7 @@ curl -X PUT "https://super-space-disco-x57rvprjvpxqfp447-8000.app.github.dev/api
 # ------------------------------------------
 
 # G. Delete Booking
-curl -X DELETE "https://super-space-disco-x57rvprjvpxqfp447-8000.app.github.dev/api/bookings/1"
+curl -X DELETE "https://super-space-disco-x57rvprjvpxqfp447-8000.app.github.dev/api/bookings/5"
 
 
 # ------------------------------------------
@@ -99,7 +99,7 @@ curl -X POST "https://super-space-disco-x57rvprjvpxqfp447-8000.app.github.dev/ap
 
 
 #  UPDATE STAFF
-curl -X PUT "https://super-space-disco-x57rvprjvpxqfp447-8000.app.github.dev/api/staff/1" \
+curl -X PUT "https://super-space-disco-x57rvprjvpxqfp447-8000.app.github.dev/api/staff/3" \
   -H "Content-Type: application/json" \
   -d '{
     "name": "T.Pranati",
@@ -109,4 +109,4 @@ curl -X PUT "https://super-space-disco-x57rvprjvpxqfp447-8000.app.github.dev/api
 
 
   #  DELETE STAFF
-  curl -X DELETE "https://super-space-disco-x57rvprjvpxqfp447-8000.app.github.dev/api/staff/1"
+  curl -X DELETE "https://super-space-disco-x57rvprjvpxqfp447-8000.app.github.dev/api/staff/4"
