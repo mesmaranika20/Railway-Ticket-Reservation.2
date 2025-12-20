@@ -99,7 +99,7 @@ curl -X POST "https://super-space-disco-x57rvprjvpxqfp447-8000.app.github.dev/ap
 
 
 #  UPDATE STAFF
-curl -X PUT "https://super-space-disco-x57rvprjvpxqfp447-8000.app.github.dev/api/staff/3" \
+curl -X PUT "https://super-space-disco-x57rvprjvpxqfp447-8000.app.github.dev/api/staff/10" \
   -H "Content-Type: application/json" \
   -d '{
     "name": "T.Pranati",
@@ -109,4 +109,4 @@ curl -X PUT "https://super-space-disco-x57rvprjvpxqfp447-8000.app.github.dev/api
 
 
   #  DELETE STAFF
-  curl -X DELETE "https://super-space-disco-x57rvprjvpxqfp447-8000.app.github.dev/api/staff/4"
+  curl -X DELETE "https://super-space-disco-x57rvprjvpxqfp447-8000.app.github.dev/api/staff/9"
