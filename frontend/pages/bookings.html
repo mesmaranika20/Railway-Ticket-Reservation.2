@@ -1,0 +1,48 @@
+<div class="max-w-3xl mx-auto p-6">
+
+  <div class="flex items-center justify-between mb-6">
+    <h1 class="text-3xl font-bold">Booking Management System</h1>
+    <a href="/home" data-link class="text-sm text-blue-600 underline">← Back to Home</a>
+  </div>
+
+  <!-- Add / Edit Booking Form -->
+  <div class="bg-white p-5 rounded shadow mb-8">
+    <h2 class="font-semibold mb-3 text-lg">Add New Booking</h2>
+
+    <form id="bookingForm" class="space-y-3">
+      <input type="text" id="passengerName" placeholder="Passenger Name" required class="w-full border rounded px-3 py-2">
+      <input type="text" id="train" placeholder="Train Name" required class="w-full border rounded px-3 py-2">
+      <input type="date" id="journeyDate" required class="w-full border rounded px-3 py-2">
+      <input type="number" id="seatNumber" placeholder="Seat Number" required class="w-full border rounded px-3 py-2">
+
+      <div class="flex space-x-2">
+        <button type="submit" class="flex-1 bg-blue-500 hover:bg-blue-600 text-white py-2 rounded">
+          Add Booking
+        </button>
+        <button type="button" class="flex-1 bg-gray-400 text-white py-2 rounded hidden">
+          Cancel
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Bookings Table -->
+  <div class="bg-white p-5 rounded shadow">
+    <h2 class="font-semibold mb-4 text-lg">All Bookings</h2>
+
+    <table class="min-w-full border text-left">
+      <thead class="bg-gray-200">
+        <tr>
+          <th class="px-3 py-2">ID</th>
+          <th class="px-3 py-2">Passenger</th>
+          <th class="px-3 py-2">Train</th>
+          <th class="px-3 py-2">Date</th>
+          <th class="px-3 py-2">Seat</th>
+          <th class="px-3 py-2">Actions</th>
+        </tr>
+      </thead>
+      <tbody id="bookingsTableBody"></tbody>
+    </table>
+  </div>
+
+</div>

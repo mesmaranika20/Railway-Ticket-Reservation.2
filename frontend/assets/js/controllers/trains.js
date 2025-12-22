@@ -1,5 +1,5 @@
 import {
-  apiGetAll,
+  apiGetAlltrains,
   // apiGetOne,
   // apiCreate,
   // apiUpdate,

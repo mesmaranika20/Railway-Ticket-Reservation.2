@@ -1,5 +1,5 @@
 // Base API URL from env.js
-const API_URL = window.ENV.TRAINS_API_BASE_URL;
+const API_URL = window.ENV.BOOKINGS_API_BASE_URL;
 
 // Helper: safely parse JSON or return null
 async function safeJson(res) {
@@ -10,22 +10,22 @@ async function safeJson(res) {
   }
 }
 
-// Fetch all trains
-export async function apiGetAllTrains() {
+// Fetch all bookings
+export async function apiGetAllBookings() {
   const res = await fetch(API_URL);
   if (!res.ok) return [];
   return safeJson(res);
 }
 
-// Fetch one train by ID
-export async function apiGetTrain(id) {
+// Fetch one booking by ID
+export async function apiGetBooking(id) {
   const res = await fetch(`${API_URL}/${id}`);
   if (!res.ok) return null;
   return safeJson(res);
 }
 
-// Create a new train
-export function apiCreateTrain(data) {
+// Create new booking
+export function apiCreateBooking(data) {
   return fetch(API_URL, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -33,8 +33,8 @@ export function apiCreateTrain(data) {
   });
 }
 
-// Update a train
-export function apiUpdateTrain(id, data) {
+// Update booking
+export function apiUpdateBooking(id, data) {
   return fetch(`${API_URL}/${id}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
@@ -42,8 +42,8 @@ export function apiUpdateTrain(id, data) {
   });
 }
 
-// Delete a train
-export function apiDeleteTrain(id) {
+// Delete booking
+export function apiDeleteBooking(id) {
   return fetch(`${API_URL}/${id}`, {
     method: "DELETE"
   });

@@ -1,0 +1,48 @@
+<div class="max-w-3xl mx-auto p-6">
+
+  <div class="flex items-center justify-between mb-6">
+    <h1 class="text-3xl font-bold">Train Management System</h1>
+    <a href="/home" data-link class="text-sm text-blue-600 underline">← Back to Home</a>
+  </div>
+
+  <!-- Add / Edit Train Form -->
+  <div class="bg-white p-5 rounded shadow mb-8">
+    <h2 class="font-semibold mb-3 text-lg">Add New Train</h2>
+
+    <form id="trainForm" class="space-y-3">
+      <input type="text" id="trainName" placeholder="Train Name" required class="w-full border rounded px-3 py-2">
+       <input type="text" id="source" placeholder="Source Station" required class="w-full border rounded px-3 py-2">
+      <input type="text" id="destination" placeholder="Destination Station" required class="w-full border rounded px-3 py-2">
+      <input type="time" id=deaprtureTime" placeholder="Destination Station" required class="w-full border rounded px-3 py-2">
+      <input type="time" id="arrival_time" required class="w-full border rounded px-3 py-2">
+
+      <div class="flex space-x-2">
+        <button type="submit" class="flex-1 bg-blue-500 hover:bg-blue-600 text-white py-2 rounded">
+          Add Train
+        </button>
+        <button type="button" class="flex-1 bg-gray-400 text-white py-2 rounded hidden">
+          Cancel
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Trains Table -->
+  <div class="bg-white p-5 rounded shadow">
+    <h2 class="font-semibold mb-4 text-lg">All Trains</h2>
+
+    <table class="min-w-full border text-left">
+      <thead class="bg-gray-200">
+        <tr>
+          <th class="px-3 py-2">Name</th>
+          <th class="px-3 py-2">Source</th>
+          <th class="px-3 py-2">Destination</th>
+          <th class="px-3 py-2">deaprtureTime<Time></Time></th>
+          <th class="px-3 py-2">arrival_time</th>
+        </tr>
+      </thead>
+      <tbody id="trainsTableBody"></tbody>
+    </table>
+  </div>
+
+</div>

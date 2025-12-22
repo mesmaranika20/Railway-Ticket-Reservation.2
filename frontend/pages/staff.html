@@ -1,0 +1,44 @@
+<div class="max-w-3xl mx-auto p-6">
+
+  <div class="flex items-center justify-between mb-6">
+    <h1 class="text-3xl font-bold">Staff Management System</h1>
+    <a href="/home" data-link class="text-sm text-blue-600 underline">← Back to Home</a>
+  </div>
+
+  <!-- Add / Edit Staff Form -->
+  <div class="bg-white p-5 rounded shadow mb-8">
+    <h2 class="font-semibold mb-3 text-lg">Add New Staff</h2>
+
+    <form id="staffForm" class="space-y-3">
+      <input type="text" id="staffName" placeholder="Staff Name" required class="w-full border rounded px-3 py-2">
+      <input type="text" id="staffRole" placeholder="Role" required class="w-full border rounded px-3 py-2">
+      <input type="text" id="staffContact" placeholder="Contact" required class="w-full border rounded px-3 py-2">
+
+      <div class="flex space-x-2">
+        <button type="submit" class="flex-1 bg-blue-500 hover:bg-blue-600 text-white py-2 rounded">
+          Add Staff
+        </button>
+        <button type="button" class="flex-1 bg-gray-400 text-white py-2 rounded hidden">
+          Cancel
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Staff Table -->
+  <div class="bg-white p-5 rounded shadow">
+    <h2 class="font-semibold mb-4 text-lg">All Staff</h2>
+
+    <table class="min-w-full border text-left">
+      <thead class="bg-gray-200">
+        <tr>
+          <th class="px-3 py-2">Name</th>
+          <th class="px-3 py-2">Role</th>
+          <th class="px-3 py-2">Phone</th>
+        </tr>
+      </thead>
+      <tbody id="staffTableBody"></tbody>
+    </table>
+  </div>
+
+</div>
