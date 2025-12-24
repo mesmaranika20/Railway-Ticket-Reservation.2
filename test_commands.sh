@@ -53,7 +53,7 @@ curl -X GET "http://localhost:8000/api/bookings/1"
 # ------------------------------------------
 
 # E. Create Booking
-curl -X POST "http://localhost:8000api/bookings" \
+curl -X POST "http://localhost:8000/api/bookings" \
 -H "Content-Type: application/json" \
 -d '{
   "train_id": 1,
@@ -65,7 +65,7 @@ curl -X POST "http://localhost:8000api/bookings" \
 # ------------------------------------------
 
 # F. Update Booking
-curl -X PUT "http://localhost:8000/api/bookings/2" \
+curl -X PUT "http://localhost:8000/api/bookings/1" \
   -H "Content-Type: application/json" \
     -d '{
         "train_id": 2,
