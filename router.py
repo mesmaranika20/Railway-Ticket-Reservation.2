@@ -4,13 +4,13 @@ from datetime import datetime
 from http.server import BaseHTTPRequestHandler
 from urllib.parse import urlparse
 
-from controllers.trains import (
-    get_all_trains,
-    get_train,
-    create_train,
-    update_train,
-    delete_train
-)
+# from controllers.trains import (
+#     get_all_trains,
+#     get_train,
+#     create_train,
+#     update_train,
+#     delete_train
+# )
 
 from controllers.bookings import (
     get_all_bookings,
@@ -20,13 +20,13 @@ from controllers.bookings import (
     delete_booking
 )
 
-from controllers.staff import (
-    get_all_staff,
-    get_staff,
-    create_staff,
-    update_staff,
-    delete_staff
-)
+# from controllers.staff import (
+#     get_all_staff,
+#     get_staff,
+#     create_staff,
+#     update_staff,
+#     delete_staff
+# )
 
 from core.static import serve_static
 from core.responses import send_404
@@ -40,17 +40,17 @@ from core.middleware import add_cors_headers
 #         serve_static(handler, "frontend/pages/index.html")
 #         return True
     
-#     if path.endswith(".html"):
-#         stripped = path.replace(".html", "")
-#         if stripped in FRONTEND_ROUTES:
-#             serve_static(handler, "frontend/pages/index.html")
-#             return True
+    # if path.endswith(".html"):
+    #     stripped = path.replace(".html", "")
+    #     if stripped in FRONTEND_ROUTES:
+    #         serve_static(handler, "frontend/pages/index.html")
+    #         return True
     
-#     if path.startswith("/frontend/"):
-#         serve_static(handler, path.lstrip("/"))
-#         return True
+    # if path.startswith("/frontend/"):
+    #     serve_static(handler, path.lstrip("/"))
+    #     return True
     
-#     return False
+    # return False
 
 class RailwayRouter(BaseHTTPRequestHandler):
     
@@ -68,14 +68,14 @@ class RailwayRouter(BaseHTTPRequestHandler):
         #     return
         
         
-        # API: List trains
-        if path == "/api/trains":
-          return get_all_trains(self)
+        # # API: List trains
+        # if path == "/api/trains":
+        #   return get_all_trains(self)
         
-        # API: Get train by id
-        if path.startswith("/api/trains/"):
-           train_id = int(path.split("/")[-1])
-           return get_train(self, train_id)
+        # # API: Get train by id
+        # if path.startswith("/api/trains/"):
+        #    train_id = int(path.split("/")[-1])
+        #    return get_train(self, train_id)
         
         # API: List bookings
         if path == "/api/bookings":
@@ -86,31 +86,31 @@ class RailwayRouter(BaseHTTPRequestHandler):
             booking_id = int(path.split("/")[-1])
             return get_booking(self, booking_id)
         
-        # API: List staff
-        if path == "/api/staff":
-            return get_all_staff(self)
+        # # API: List staff
+        # if path == "/api/staff":
+        #     return get_all_staff(self)
         
-        # API: Get staff by id
-        if path.startswith("/api/staff/"):
-            staff_id = int(path.split("/")[-1])
-            return get_staff(self, staff_id)
+        # # API: Get staff by id
+        # if path.startswith("/api/staff/"):
+        #     staff_id = int(path.split("/")[-1])
+        #     return get_staff(self, staff_id)
         
         return send_404(self)
     
     def do_POST(self):
         path = urlparse(self.path).path
         
-        # API: Create train
-        if path == "/api/trains":
-            return create_train(self)
+        # # API: Create train
+        # if path == "/api/trains":
+        #     return create_train(self)
         
         # API: Create booking
         if path == "/api/bookings":
             return create_booking(self)
         
-        # API: Create staff
-        if path == "/api/staff":
-            return create_staff(self)
+        # # API: Create staff
+        # if path == "/api/staff":
+        #     return create_staff(self)
         
         return send_404(self)
     
@@ -118,20 +118,20 @@ class RailwayRouter(BaseHTTPRequestHandler):
         parsed = urlparse(self.path)
         path = parsed.path
         
-    #     # API: Update train
-        if path.startswith("/api/trains/"):
-            train_id = int(path.split("/")[-1])
-            return update_train(self, train_id)
+    # #     # API: Update train
+    #     if path.startswith("/api/trains/"):
+    #         train_id = int(path.split("/")[-1])
+    #         return update_train(self, train_id)
         
     #     # API: Update booking
         if path.startswith("/api/bookings/"):
             booking_id = int(path.split("/")[-1])
             return update_booking(self, booking_id)
         
-    #     # API: Update staff
-        if path.startswith("/api/staff/"):
-            staff_id = int(path.split("/")[-1])
-            return update_staff(self, staff_id)
+    # #     # API: Update staff
+    #     if path.startswith("/api/staff/"):
+    #         staff_id = int(path.split("/")[-1])
+    #         return update_staff(self, staff_id)
         
         return send_404(self)
     
@@ -139,20 +139,20 @@ class RailwayRouter(BaseHTTPRequestHandler):
         parsed = urlparse(self.path)
         path = parsed.path
         
-    #     # API: Delete train
-        if path.startswith("/api/trains/"):
-            train_id = int(path.split("/")[-1])
-            return delete_train(self, train_id)
+    # #     # API: Delete train
+    #     if path.startswith("/api/trains/"):
+    #         train_id = int(path.split("/")[-1])
+    #         return delete_train(self, train_id)
         
     #     # API: Cancel booking
         if path.startswith("/api/bookings/"):
             booking_id = int(path.split("/")[-1])
             return delete_booking(self, booking_id)
         
-    #     # API: Delete staff
-        if path.startswith("/api/staff/"):
-            staff_id = int(path.split("/")[-1])
-            return delete_staff(self, staff_id)
+    # #     # API: Delete staff
+    #     if path.startswith("/api/staff/"):
+    #         staff_id = int(path.split("/")[-1])
+    #         return delete_staff(self, staff_id)
         
         return send_404(self)
 
