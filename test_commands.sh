@@ -3,21 +3,21 @@
 ############################################
 
 # A. Get All Trains
-curl -X GET "http://localhost:8000/api/trains"
+curl -X GET "https://super-space-disco-x57rvprjvpxqfp447-8000.app.github.dev/api/trains"
 
 # GET ALL BOOKINGS
-curl -X GET "http://localhost:8000/api/bookings"
+curl -X GET "https://super-space-disco-x57rvprjvpxqfp447-8000.app.github.dev/api/bookings"
 
 #   GET ALL STAFF
-curl -X GET "http://localhost:8000/api/staff"
+curl -X GET "https://super-space-disco-x57rvprjvpxqfp447-8000.app.github.dev/api/staff"
 
 # ------------------------------------------
 
 # B. Get One Train
-curl -X GET "http://localhost:8000/api/trains/1"
+curl -X GET "https://super-space-disco-x57rvprjvpxqfp447-8000.app.github.dev/api/trains/1"
 
 # -------CREATE TRAIN-----------------------------------
-curl -X POST "http://localhost:8000/api/trains" \
+curl -X POST "https://super-space-disco-x57rvprjvpxqfp447-8000.app.github.dev/api/trains" \
 -H "Content-Type: application/json" \
 -d '{
   "train_name": "Rajdhani Express",
@@ -28,7 +28,7 @@ curl -X POST "http://localhost:8000/api/trains" \
 }'
 #  UPDATE THE TRAINS
 
-curl -X PUT "http://localhost:8000/api/trains/1" \
+curl -X PUT "https://super-space-disco-x57rvprjvpxqfp447-8000.app.github.dev/api/trains/1" \
   -H "Content-Type: application/json" \
   -d '{
     "train_name": "Express Line Updated",
@@ -39,21 +39,21 @@ curl -X PUT "http://localhost:8000/api/trains/1" \
   }'
 
   # DELETE TRAINS
-  curl -X DELETE "http://localhost:8000/api/trains/1"
+  curl -X DELETE "https://super-space-disco-x57rvprjvpxqfp447-8000.app.github.dev/api/trains/1"
 
 
 # C. Get All Bookings
-curl -X GET "http://localhost:8000/api/bookings"
+curl -X GET "https://super-space-disco-x57rvprjvpxqfp447-8000.app.github.dev/api/bookings"
 
 # ------------------------------------------
 
 # D. Get One Booking
-curl -X GET "http://localhost:8000/api/bookings/1"
+curl -X GET "https://super-space-disco-x57rvprjvpxqfp447-8000.app.github.dev/api/bookings/1"
 
 # ------------------------------------------
 
 # E. Create Booking
-curl -X POST "http://localhost:8000/api/bookings" \
+curl -X POST "https://super-space-disco-x57rvprjvpxqfp447-8000.app.github.dev/api/bookings" \
 -H "Content-Type: application/json" \
 -d '{
   "train_id": 1,
@@ -65,7 +65,7 @@ curl -X POST "http://localhost:8000/api/bookings" \
 # ------------------------------------------
 
 # F. Update Booking
-curl -X PUT "http://localhost:8000/api/bookings/1" \
+curl -X PUT "https://super-space-disco-x57rvprjvpxqfp447-8000.app.github.dev/api/bookings/1" \
   -H "Content-Type: application/json" \
     -d '{
         "train_id": 2,
@@ -78,18 +78,18 @@ curl -X PUT "http://localhost:8000/api/bookings/1" \
 # ------------------------------------------
 
 # G. Delete Booking
-curl -X DELETE "http://localhost:8000/api/bookings/1"
+curl -X DELETE "https://super-space-disco-x57rvprjvpxqfp447-8000.app.github.dev/api/bookings/1"
 
 
 # ------------------------------------------
 
 # H. Get All Staff
-curl -X GET "http://localhost:8000/api/staff"
+curl -X GET "https://super-space-disco-x57rvprjvpxqfp447-8000.app.github.dev/api/staff"
 
 
 
 #  CREATE STAFF
-curl -X POST "http://localhost:8000/api/staff" \
+curl -X POST "https://super-space-disco-x57rvprjvpxqfp447-8000.app.github.dev/api/staff" \
 -H "Content-Type: application/json" \
 -d '{
   "name": "Ramesh Kumar",
@@ -99,7 +99,7 @@ curl -X POST "http://localhost:8000/api/staff" \
 
 
 #  UPDATE STAFF
-curl -X PUT "http://localhost:8000/api/staff/1" \
+curl -X PUT "https://super-space-disco-x57rvprjvpxqfp447-8000.app.github.dev/api/staff/1" \
   -H "Content-Type: application/json" \
   -d '{
     "name": "Robert Smith Updated",
@@ -109,4 +109,4 @@ curl -X PUT "http://localhost:8000/api/staff/1" \
 
 
   #  DELETE STAFF
-  curl -X DELETE "http://localhost:8000/api/staff/1"
+  curl -X DELETE "https://super-space-disco-x57rvprjvpxqfp447-8000.app.github.dev/api/staff/1"

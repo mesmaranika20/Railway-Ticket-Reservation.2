@@ -1,7 +1,9 @@
-// // Environment variables for frontend
-// window.ENV = {
-//   APP_NAME: "Train Ticket Management",
-//   API_BASE_URL: "/api/trains",
-//   API_BASE_URL: "/api/bookings",
-//   API_BASE_URL: "/api/staff",
-// };
+// Environment variables for frontend
+window.ENV = {
+  APP_NAME: "Railway Ticket Reservation",
+   API_BASE_URLS: {
+    trains: "/api/trains",
+    bookings: "/api/bookings",
+    staff: "/api/staff"
+  }
+};
