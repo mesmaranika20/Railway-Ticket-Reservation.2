@@ -28,7 +28,7 @@ curl -X POST "https://super-space-disco-x57rvprjvpxqfp447-8000.app.github.dev/ap
 }'
 #  UPDATE THE TRAINS
 
-curl -X PUT "https://super-space-disco-x57rvprjvpxqfp447-8000.app.github.dev/api/trains/1" \
+curl -X PUT "https://super-space-disco-x57rvprjvpxqfp447-8000.app.github.dev/api/trains/2" \
   -H "Content-Type: application/json" \
   -d '{
     "train_name": "Express Line Updated",
@@ -39,7 +39,7 @@ curl -X PUT "https://super-space-disco-x57rvprjvpxqfp447-8000.app.github.dev/api
   }'
 
   # DELETE TRAINS
-  curl -X DELETE "https://super-space-disco-x57rvprjvpxqfp447-8000.app.github.dev/api/trains/1"
+  curl -X DELETE "https://super-space-disco-x57rvprjvpxqfp447-8000.app.github.dev/api/trains/2"
 
 
 # C. Get All Bookings
@@ -65,7 +65,7 @@ curl -X POST "https://super-space-disco-x57rvprjvpxqfp447-8000.app.github.dev/ap
 # ------------------------------------------
 
 # F. Update Booking
-curl -X PUT "https://super-space-disco-x57rvprjvpxqfp447-8000.app.github.dev/api/bookings/1" \
+curl -X PUT "https://super-space-disco-x57rvprjvpxqfp447-8000.app.github.dev/api/bookings/2" \
   -H "Content-Type: application/json" \
     -d '{
         "train_id": 2,
@@ -78,7 +78,7 @@ curl -X PUT "https://super-space-disco-x57rvprjvpxqfp447-8000.app.github.dev/api
 # ------------------------------------------
 
 # G. Delete Booking
-curl -X DELETE "https://super-space-disco-x57rvprjvpxqfp447-8000.app.github.dev/api/bookings/1"
+curl -X DELETE "https://super-space-disco-x57rvprjvpxqfp447-8000.app.github.dev/api/bookings/2"
 
 
 # ------------------------------------------
@@ -99,7 +99,7 @@ curl -X POST "https://super-space-disco-x57rvprjvpxqfp447-8000.app.github.dev/ap
 
 
 #  UPDATE STAFF
-curl -X PUT "https://super-space-disco-x57rvprjvpxqfp447-8000.app.github.dev/api/staff/1" \
+curl -X PUT "https://super-space-disco-x57rvprjvpxqfp447-8000.app.github.dev/api/staff/2" \
   -H "Content-Type: application/json" \
   -d '{
     "name": "Robert Smith Updated",
@@ -109,4 +109,4 @@ curl -X PUT "https://super-space-disco-x57rvprjvpxqfp447-8000.app.github.dev/api
 
 
   #  DELETE STAFF
-  curl -X DELETE "https://super-space-disco-x57rvprjvpxqfp447-8000.app.github.dev/api/staff/1"
+  curl -X DELETE "https://super-space-disco-x57rvprjvpxqfp447-8000.app.github.dev/api/staff/2"
