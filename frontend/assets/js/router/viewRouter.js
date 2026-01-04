@@ -32,9 +32,9 @@ export async function router() {
 
     }
 
-    // else {
-    //     await loadView("/frontend/pages/404.html");
-    // }
+    else {
+        await loadView("/frontend/pages/404.html");
+    }
 }
 
 export function initRouterEvents() {
