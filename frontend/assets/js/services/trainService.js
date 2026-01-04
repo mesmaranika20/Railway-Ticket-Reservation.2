@@ -1,5 +1,5 @@
 // Base API URL from env.js
-const API_URL = window.ENV.API_BASE_URLS.staff;
+const API_URL = window.ENV.API_BASE_URLS.trains;
 
 // Helper: safely parse JSON or return null
 async function safeJson(res) {
@@ -11,21 +11,21 @@ async function safeJson(res) {
 }
 
 // Fetch all students
-export async function apiGetAllStaff() {
+export async function apiGetAllTrain() {
   const res = await fetch(API_URL);
   if (!res.ok) return [];
   return safeJson(res);
 }
 
 // // Fetch one student by ID
-export async function apiGetOneStaff(id) {
+export async function apiGetOneTrain(id) {
   const res = await fetch(`${API_URL}/${id}`);
   if (!res.ok) return null;
   return safeJson(res);
 }
 
 // // Create a new student
-export function apiCreateStaff(data) {
+export function apiCreateTrain(data) {
   return fetch(API_URL, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -34,7 +34,7 @@ export function apiCreateStaff(data) {
 }
 
 // // Update a student
-export function apiUpdateStaff(id, data) {
+export function apiUpdateTrain(id, data) {
   return fetch(`${API_URL}/${id}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
@@ -43,6 +43,6 @@ export function apiUpdateStaff(id, data) {
 }
 
 // // Delete a student
-export function apiDeleteStaff(id) {
+export function apiDeleteTrain(id) {
   return fetch(`${API_URL}/${id}`, { method: "DELETE" });
 }
