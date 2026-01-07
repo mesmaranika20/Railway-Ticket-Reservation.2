@@ -1,6 +1,10 @@
 # Handlers are responsible for dealing with HTTP details (headers, body, methods)
 
 import json
+
+# from services.booking_service import service_get_all_with_trains
+
+
 from core.responses import send_json, send_404
 from core.request import parse_json_body
 from services.booking_service import (
@@ -36,3 +40,6 @@ def update_booking(handler, booking_id):
 def delete_booking(handler, booking_id):
     deleted = service_delete(booking_id)
     return send_json(handler, 200, {"deleted": True}) if deleted else send_404(handler)
+
+# def get_all_bookings_with_trains(handler):
+#     return send_json(handler, 200, service_get_all_with_trains())

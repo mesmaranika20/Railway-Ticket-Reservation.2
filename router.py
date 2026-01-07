@@ -1,5 +1,7 @@
 # Matches incoming HTTP paths (URLs) to handlers (like a tiny Express/Django router)
 
+# from controllers.bookings import get_all_bookings_with_trains
+
 from datetime import datetime
 from http.server import BaseHTTPRequestHandler
 from urllib.parse import urlparse
@@ -9,8 +11,12 @@ from controllers.trains import (
     get_train,
     create_train,
     update_train,
-    delete_train
+    delete_train,
+    # get_all_bookings_with_trains,
 )
+
+
+# from controllers.bookings import get_all_bookings_with_trains
 
 from controllers.bookings import (
     get_all_bookings,
@@ -95,6 +101,17 @@ class RailwayRouter(BaseHTTPRequestHandler):
             staff_id = int(path.split("/")[-1])
             return get_staff(self, staff_id)
         
+        # # API: Bookings with Train details (JOIN)
+        # if path == "/api/bookings-with-trains":
+        #     return get_all_bookings_with_trains(self)
+        # print("Requested path:", path)
+
+        def do_GET(self):
+         path = urlparse(self.path).path
+         print("DEBUG PATH:", path)
+ 
+
+        
         return send_404(self)
     
     def do_POST(self):
@@ -111,6 +128,9 @@ class RailwayRouter(BaseHTTPRequestHandler):
         # API: Create staff
         if path == "/api/staff":
             return create_staff(self)
+        
+        
+
         
         return send_404(self)
     
