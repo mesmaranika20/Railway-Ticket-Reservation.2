@@ -19,7 +19,7 @@ import os
 
 class TestDatabaseBasics(unittest.TestCase):
 
-    def test_students_db_exists(self):
+    def test_railway_db_exists(self):
         """
         Check that the database file is present in the project.
 
@@ -28,7 +28,7 @@ class TestDatabaseBasics(unittest.TestCase):
         - the test should fail immediately
         """
 
-        # Check: does 'students.db' file exist?
+        # Check: does 'railway.db' file exist?
         self.assertTrue(
             os.path.exists("railway.db"),
             "students.db file is missing"
