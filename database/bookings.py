@@ -4,11 +4,11 @@ from datetime import datetime
 from .connection import get_connection
 
 
-# def db_get_all():
-#     conn = get_connection()
-#     rows = conn.execute("SELECT * FROM bookings ORDER BY id DESC").fetchall()
-#     conn.close()
-#     return [dict(r) for r in rows]
+def db_get_all():
+    conn = get_connection()
+    rows = conn.execute("SELECT * FROM bookings ORDER BY id DESC").fetchall()
+    conn.close()
+    return [dict(r) for r in rows]
 
 
 def db_get_one(booking_id):
@@ -70,30 +70,6 @@ def db_delete(booking_id):
     booking = db_get_one(booking_id)
     if not booking:
         return None
-
-# #  Join Op   
-# def db_get_all_with_trains():
-#     conn = get_connection()
-#     rows = conn.execute("""
-#         SELECT
-#             b.id AS booking_id,
-#             b.passenger_name,
-#             b.seat_number,
-#             b.booking_date,
-#             t.id AS train_id,
-#             t.train_name,
-#             t.source,
-#             t.destination,
-#             t.departure_time,
-#             t.arrival_time
-#         FROM bookings b
-#         JOIN trains t
-#         ON b.train_id = t.id
-#         ORDER BY b.id DESC
-#     """).fetchall()
-#     conn.close()
-#     return [dict(r) for r in rows]
-
 
     conn = get_connection()
     conn.execute("DELETE FROM bookings WHERE id=?", (booking_id,))

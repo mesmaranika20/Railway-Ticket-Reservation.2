@@ -28,10 +28,10 @@ class TestDatabaseBasics(unittest.TestCase):
         - the test should fail immediately
         """
 
-        # Check: does 'railway.db' file exist?
+        # Check: does 'students.db' file exist?
         self.assertTrue(
             os.path.exists("railway.db"),
-            "students.db file is missing"
+            "railway.db file is missing"
         )
 
     def test_can_connect_and_list_tables(self):
@@ -65,5 +65,13 @@ class TestDatabaseBasics(unittest.TestCase):
         # Check: expected table should exist
         self.assertIn(
             "trains",
+            tables
+        )
+        self.assertIn(
+            "bookings",
+            tables
+        )
+        self.assertIn(
+            "staff",
             tables
         )

@@ -1,8 +1,6 @@
 # Contains business logic (validation, processing, rules)
 # Does NOT know about HTTP - only works with Python data
 
-
-# from database.bookings import db_get_all_with_trains 
 from database.bookings import (
     db_get_all,
     db_get_one,
@@ -30,6 +28,3 @@ def service_update(booking_id, data):
 
 def service_delete(booking_id):
     return db_delete(booking_id)
-
-# def service_get_all_with_trains():
-#     return db_get_all_with_trains()
