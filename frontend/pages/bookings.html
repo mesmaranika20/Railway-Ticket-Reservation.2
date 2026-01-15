@@ -1,62 +1,65 @@
-1  <div class="max-w-3xl mx-auto p-6 main-wrapper page-bookings">
+<div class="max-w-4xl mx-auto p-6 main-wrapper page-bookings">
 
-
-  <div class="flex items-center justify-between mb-6">
-    <h1 class="text-3xl font-bold">Booking Management</h1>
-    <a href="/home" data-link class="text-sm text-blue-600 underline">← Back to Home</a>
-  </div>
-
-  <!-- Add / Edit Booking Form -->
-  <div class="bg-white p-5 rounded shadow mb-8">
-    <h2 class="font-semibold mb-3 text-lg">Add New Booking</h2>
-    <form id="BookingForm" class="space-y-3">
-        <input type="number" id="train_id" placeholder="Train ID" required class="w-full border rounded px-3 py-2">
-        <input type="text" id="passenger_name" placeholder="Passenger Name" required class="w-full border rounded px-3 py-2">
-      <input type="number" id="seat_number" placeholder="Seat Number" required class="w-full border rounded px-3 py-2">
-      <input type="date" id="booking_date" placeholder="Booking date" class="w-full border rounded px-3 py-2">
-
-      <div class="flex space-x-2">
-        <button type="submit" id="submitBtn"
-          class="flex-1 bg-blue-500 hover:bg-blue-600 text-white py-2 rounded">
-          Add Booking
-        </button>
-
-        <button type="button" id="cancelBtn"
-          class="flex-1 bg-gray-400 hover:bg-gray-500 text-white py-2 rounded hidden">
-          Cancel
-        </button>
-      </div>
-    </form>
-  </div>
-
-  <!-- Bookings Table -->
-  <div class="bg-white p-5 rounded shadow">
-    <h2 class="font-semibold mb-4 text-lg">All Bookings</h2>
-
-    <div id="loadingSpinner" class="text-center py-4">
-      <div class="animate-spin rounded-full h-6 w-6 border-b-2 border-blue-500 mx-auto"></div>
+    <div class="page-header">
+        <div>
+            <h1 class="text-2xl font-bold text-gray-800">Booking Management</h1>
+            <p class="text-sm text-gray-500 mt-1">View and manage passenger reservations</p>
+        </div>
+        <a href="/" data-link class="text-sm font-medium text-blue-600 hover:text-blue-800 transition flex items-center gap-1">
+            <i class="fa-solid fa-arrow-left"></i> Back to Dashboard
+        </a>
     </div>
 
-    <div id="BookingsTableContainer" class="hidden overflow-x-auto">
-      <table class="min-w-full text-left border">
-        <thead class="bg-gray-200">
-          <tr>
-            <th class="px-3 py-2">ID</th>
-            <th class="px-3 py-2">Train ID</th>
-            <th class="px-3 py-2">Passenger</th>
-            <th class="px-3 py-2">Seats</th>
-            <th class="px-3 py-2">Booking Date</th>
-            <th class="px-3 py-2">Actions</th>
-          </tr>
-        </thead>
-        <tbody id="BookingsTableBody"></tbody>
-      </table>
+    <div class="form-card mb-8">
+        <h2 class="font-semibold mb-4 text-lg text-gray-800 border-b pb-2">Add New Booking</h2>
+        <form id="BookingForm" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            
+            <input type="text" id="passenger_name" placeholder="Passenger Name" required class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition">
+            
+            <input type="number" id="seat_number" placeholder="Seat Number" required class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition">
+            
+            <input type="date" id="booking_date" required class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition">
 
-      <p id="noBookings" class="text-center text-gray-500 mt-3 hidden">
-        No bookings found. Add one using the form above.
-      </p>
+            <div class="md:col-span-2 flex space-x-3 mt-2">
+                <button type="submit" id="submitBtn" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-medium py-2.5 rounded-lg transition shadow-sm">
+                    <i class="fa-solid fa-ticket mr-2"></i> Book Ticket
+                </button>
+
+                <button type="button" id="cancelBtn" class="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium py-2.5 rounded-lg hidden transition">
+                    Cancel
+                </button>
+            </div>
+        </form>
     </div>
-  </div>
 
-  <div id="alertContainer" class="fixed top-4 right-4 space-y-2 z-50"></div>
+    <div class="table-card">
+        <h2 class="font-semibold mb-4 text-lg text-gray-800">All Bookings</h2>
+
+        <div id="loadingSpinner" class="text-center py-8">
+            <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto"></div>
+            <p class="text-gray-500 text-sm mt-2">Loading reservations...</p>
+        </div>
+
+        <div id="BookingsTableContainer" class="hidden overflow-x-auto rounded-lg border border-gray-200">
+            <table class="min-w-full text-left">
+                <thead>
+                    <tr>
+                        <th class="px-4 py-3 bg-gray-50 font-semibold text-gray-600">ID</th>
+                        <th class="px-4 py-3 bg-gray-50 font-semibold text-gray-600">Passenger</th>
+                        <th class="px-4 py-3 bg-gray-50 font-semibold text-gray-600">Seat</th>
+                        <th class="px-4 py-3 bg-gray-50 font-semibold text-gray-600">Date</th>
+                        <th class="px-4 py-3 bg-gray-50 font-semibold text-gray-600 text-right">Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="bookingsTableBody" class="divide-y divide-gray-100">
+                    </tbody>
+            </table>
+
+            <p id="noBookings" class="text-center text-gray-500 py-8 hidden">
+                No bookings found. Add one using the form above.
+            </p>
+        </div>
+    </div>
+
+    <div id="alertContainer" class="fixed top-4 right-4 space-y-2 z-50"></div>
 </div>

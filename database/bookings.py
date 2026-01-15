@@ -26,11 +26,11 @@ def db_create(data):
     cur = conn.execute(
         """
         INSERT INTO bookings
-        (train_id, passenger_name, seat_number, booking_date, created_at)
-        VALUES (?, ?, ?, ?, ?)
+        ( passenger_name, seat_number, booking_date, created_at)
+        VALUES ( ?, ?, ?, ?)
         """,
         (
-            data["train_id"],
+            
             data["passenger_name"],
             data["seat_number"],
             data["booking_date"],
@@ -49,11 +49,10 @@ def db_update(booking_id, data):
     conn.execute(
         """
         UPDATE bookings
-        SET train_id=?, passenger_name=?, seat_number=?, booking_date=?, updated_at=?
+        SET  passenger_name=?, seat_number=?, booking_date=?, updated_at=?
         WHERE id=?
         """,
         (
-            data["train_id"],
             data["passenger_name"],
             data["seat_number"],
             data["booking_date"],

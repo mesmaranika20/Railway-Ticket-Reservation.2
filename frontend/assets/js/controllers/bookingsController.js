@@ -8,7 +8,7 @@ import {
 
 import { showAlert } from "../components/Alert.js";
 import { renderBookingTable } from "../components/BookingTable.js";
-import { resetForm, BookingForm } from "../components/BookingForm.js";
+import { resetBookingForm, fillBookingForm } from "../components/BookingForm.js";
 
 import { setState, getState } from "../state/store.js";
 import {$, createElement } from "../utils/dom.js";
@@ -29,7 +29,6 @@ export function initBookingsController() {
 
      // Collect data from the input fields using the custom '$' selector
      const data = {
-      train_id: $("train_id").value.trim(),   // Get name passenger name, remove whitespace
       passenger_name: $("passenger_name").value.trim(),   // Get name passenger name, remove whitespace
       seat_number: $("seat_number").value.trim(),   // Get seat number
       booking_date: $("booking_date").value.trim(),  // Get booking date
@@ -53,7 +52,7 @@ export function initBookingsController() {
       // Clear the editing state (set the ID to null)
       setState({ editingId: null });
       // Clear all input fields in the form
-      resetForm();
+      resetBookingForm();
   });
 }
 
@@ -85,7 +84,7 @@ export async function  createNewBooking(data) {
     const res = await apiCreateBooking(data);
     if (res.ok) {
         showAlert("Booking added!");
-        resetForm();
+        resetBookingForm();
         loadBookings();
     }
 }
@@ -95,7 +94,7 @@ export async function editBooking(id) {
     const booking = await apiGetOneBooking(id);
 
     setState({ editingId: id });
-    BookingForm(booking);
+    fillBookingForm(booking);
 
     window.scrollTo({ top: 0, behavior: "smooth"});
 }
@@ -105,7 +104,7 @@ export async function updateBooking(id, data) {
     const res = await apiUpdateBooking(id, data);
     if (res.ok) {
         showAlert("Updated!");
-         resetForm();
+         resetBookingForm();
         setState({ editingId: null });
         loadBookings();
     }

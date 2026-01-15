@@ -1,5 +1,5 @@
 // Base API URL from env.js
-const API_URL = window.ENV.API_BASE_URLS.trains;
+const API_URL = window.ENV.API_BASE_URL;
 
 // Helper: safely parse JSON or return null
 async function safeJson(res) {

@@ -30,7 +30,6 @@ def init_database():
     conn.execute("""
         CREATE TABLE IF NOT EXISTS bookings (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
-            train_id INTEGER,
             passenger_name TEXT,
             seat_number TEXT,
             booking_date TEXT,
@@ -47,6 +46,19 @@ def init_database():
             contact TEXT,
             created_at TEXT,
             updated_at TEXT
+        )
+    """)
+
+    conn.execute("""
+        CREATE TABLE IF NOT EXISTS reservations (
+              id INTEGER PRIMARY KEY AUTOINCREMENT,
+              train_id INTEGER NOT NULL,
+               booking_id INTEGER NOT NULL,
+                reserved_on TEXT,
+                created_at TEXT,
+                updated_at TEXT,
+                FOREIGN KEY(train_id) REFERENCES trains(id),
+                FOREIGN KEY(booking_id) REFERENCES bookings(id)
         )
     """)
 

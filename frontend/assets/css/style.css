@@ -216,3 +216,58 @@ a[data-link]:hover {
     transform: translateY(0) scale(1);
   }
 }
+
+
+
+
+/* New added */
+/* ---------- Common Page Background ---------- */
+.page-bg {
+  min-height: 100vh;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+  padding: 40px;
+}
+
+/* Dark overlay for readability */
+.page-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 0;
+}
+
+/* Page content should be above overlay */
+.page-content {
+  position: relative;
+  z-index: 1;
+  background: rgba(255, 255, 255, 0.92);
+  padding: 25px;
+  border-radius: 12px;
+}
+
+/* ---------- Train Page ---------- */
+.train-bg {
+  /* background-image: url("https://images.unsplash.com/photo-1504384308090-c894fdcc538d"); */
+  background-image: url("https://unsplash.com/photos/yellow-train-on-rail-tracks-during-daytime-pfkzBUh4KyA?utm_source=unsplash&utm_medium=referral&utm_content=creditShareLink");
+}
+
+/* ---------- Booking Page ---------- */
+.booking-bg {
+  /* background-image: url("https://images.unsplash.com/photo-1529070538774-1843cb3265df"); */
+  background-image: url("https://unsplash.com/photos/a-computer-screen-with-a-calendar-on-it-4BnNnEtAGP0?utm_source=unsplash&utm_medium=referral&utm_content=creditShareLink");
+}
+
+/* ---------- Staff Page ---------- */
+.staff-bg {
+  background-image: url("https://images.unsplash.com/photo-1521737604893-d14cc237f11d");
+}
+
+/* Headings */
+.page-content h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
