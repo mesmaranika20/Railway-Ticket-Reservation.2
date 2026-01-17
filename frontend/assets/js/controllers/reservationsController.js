@@ -1,6 +1,7 @@
 import { apiGetAll as apiGetAllReservations, apiCreate, apiDelete } from "../services/reservationService.js";
-import { apiGetAllTrain as apiGetAllTrains } from "../services/trainService.js";
-import { apiGetAllBooking as apiGetAllBookings } from "../services/bookingService.js";
+import { apiGetAll as apiGetAllTrains } from "../services/trainService.js";
+import { apiGetAll as apiGetAllBookings } from "../services/bookingService.js";
+import { apiGetAll as apiGetAllstaff } from "../services/staffService.js";
 
 import { showAlert } from "../components/Alert.js";
 import { renderReservationTable } from "../components/ReservationTable.js";
@@ -17,6 +18,7 @@ export function initReservationController() {
     const data = {
       train_id: Number($("train_id").value),
       booking_id: Number($("booking_id").value),
+      staff_id: Number($("staff_id").value)
     };
 
     const res = await apiCreate(data);
@@ -32,8 +34,8 @@ async function loadEverything() {
 }
 
 async function loadTrainsAndBookings() {
-  const [trains, bookings] = await Promise.all([apiGetAllTrains(), apiGetAllBookings()]);
-  fillReservationDropdowns(trains, bookings);
+  const [trains, bookings, staff] = await Promise.all([apiGetAllTrains(), apiGetAllBookings(), apiGetAllstaff()]);
+  fillReservationDropdowns(trains, bookings, staff);
 }
 
 async function loadReservationsOnly() {
