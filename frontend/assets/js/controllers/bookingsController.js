@@ -16,13 +16,13 @@ import {$, createElement } from "../utils/dom.js";
 // Setup event listeners and load initial data
 // Initialize the main logic and set up all necessary event listeners
 export function initBookingsController() {
-    // Start by fetching and displaying all student data immediately upon load
+    // Start by fetching and displaying all train data immediately upon load
     loadBookings();
     
      // --- Handle Form Submissions ---
 
      
-  // Attach a listener to the 'submit' event of the student input form
+  // Attach a listener to the 'submit' event of the train input form
   $("BookingForm").addEventListener("submit", async (e) => {
      // Prevent the browser's default form submission behavior (page refresh)
      e.preventDefault();
@@ -32,6 +32,8 @@ export function initBookingsController() {
       passenger_name: $("passenger_name").value.trim(),   // Get name passenger name, remove whitespace
       coach_number: $("coach_number").value.trim(),   // Get seat number
       booking_date: $("booking_date").value.trim(),  // Get booking date
+      total_seats: $("total_seats").value.trim(),  // Get booking date
+      payment: $("payment").value.trim(),  // Get booking date
      
      };
 
@@ -79,7 +81,7 @@ export async function loadBookings() {
     table.style.display = "block";
 }
 
-// // Create a new student
+// // Create a new train
 export async function  createNewBooking(data) {
     const res = await apiCreateBooking(data);
     if (res.ok) {
@@ -89,7 +91,7 @@ export async function  createNewBooking(data) {
     }
 }
 
-// // Load a student into the form for editing
+// // Load a train into the form for editing
 export async function editBooking(id) {
     const booking = await apiGetOneBooking(id);
 
@@ -99,7 +101,7 @@ export async function editBooking(id) {
     window.scrollTo({ top: 0, behavior: "smooth"});
 }
 
-// // Update an existing student
+// // Update an existing train
 export async function updateBooking(id, data) {
     const res = await apiUpdateBooking(id, data);
     if (res.ok) {
@@ -110,7 +112,7 @@ export async function updateBooking(id, data) {
     }
 }
 
-// // Delete a student
+// // Delete a train
 export async function deleteBookingAction(id) {
     if (!confirm("Delete this Booking?")) return;
 
