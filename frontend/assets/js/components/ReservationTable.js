@@ -19,6 +19,7 @@ export function renderReservationTable(reservations) {
       <td class="px-3 py-2 border">${r.id}</td>
       <td class="px-3 py-2 border">${r.train_id}</td>
       <td class="px-3 py-2 border">${r.booking_id}</td>
+      <td class="px-3 py-2 border">${r.staff_id}</td>
       <td class="px-3 py-2 border">${r.reserved_on ?? ""}</td>
       <td class="px-3 py-2 border">
         <button class="text-red-600 underline" data-del="${r.id}">Delete</button>
