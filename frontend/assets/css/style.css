@@ -192,15 +192,15 @@ a[data-link]:hover {
    ALERTS & SPINNER
 ========================================= */
 #loadingSpinner div {
-  border-color: #f97316;
+  border-color: #abcbf3;
 }
 
 #alertContainer > div {
   border-radius: 14px;
   font-weight: 600;
-  background: linear-gradient(135deg, #fdba74, #fb923c);
+  background: linear-gradient(135deg, #909df6, #a9aef3);
   color: #7c2d12;
-  box-shadow: 0 12px 32px rgba(124, 45, 18, 0.35);
+  box-shadow: 0 12px 32px rgba(120, 124, 18, 0.35);
 }
 
 /* =========================================

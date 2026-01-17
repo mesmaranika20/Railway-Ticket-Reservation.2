@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Railway Events</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        /* ================= RESET & THEME ================= */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Segoe UI", Tahoma, sans-serif;
+        }
+
+        /* Matches Home/Trains/Staff/Reservations */
+        .events-page-wrapper {
+            background: linear-gradient(180deg, #e0f2fe 0%, #bae6fd 100%);
+            background-attachment: fixed;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+            padding: 50px 20px;
+        }
+
+        /* ================= SCENIC BACKGROUND ================= */
+        .scenic-bg {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 60vh;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .hill {
+            position: absolute;
+            bottom: 0;
+            width: 200%;
+            height: 100%;
+            background-repeat: repeat-x;
+            opacity: 0.5;
+        }
+
+        .hill-1 {
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%237dd3fc" d="M0,160L80,176C160,192,320,224,480,213.3C640,203,800,149,960,144C1120,139,1280,181,1360,202.7L1440,224L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z"></path></svg>');
+            animation: moveHill 60s linear infinite;
+            bottom: -50px;
+        }
+
+        .bullet-train-container {
+            position: absolute;
+            bottom: 120px;
+            width: 100%;
+            height: 2px;
+            background: rgba(15, 23, 42, 0.05);
+        }
+
+        .bullet-train {
+            position: absolute;
+            top: -15px;
+            left: -500px;
+            display: flex;
+            align-items: center;
+            animation: highSpeedPass 12s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+        }
+
+        .train-head {
+            width: 70px;
+            height: 20px;
+            background: #0369a1;
+            border-radius: 50% 12px 3px 3px;
+        }
+
+        .speed-lines {
+            width: 120px;
+            height: 15px;
+            background: linear-gradient(90deg, transparent, rgba(3, 105, 161, 0.3));
+            margin-left: -5px;
+        }
+
+        @keyframes moveHill { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+        @keyframes highSpeedPass { 0% { transform: translateX(-100%); } 30%, 100% { transform: translateX(200vw); } }
+
+        /* ================= TIMELINE & CONTENT ================= */
+        .main-wrapper {
+            position: relative;
+            z-index: 10;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 40px;
+        }
+
+        .timeline::before {
+            content: "";
+            position: absolute;
+            left: 54px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: rgba(3, 105, 161, 0.1);
+            border-radius: 10px;
+        }
+
+        .event {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 45px;
+        }
+
+        .date {
+            width: 80px;
+            height: 80px;
+            min-width: 80px;
+            border-radius: 16px;
+            color: #fff;
+            text-align: center;
+            padding-top: 8px;
+            margin-right: 30px;
+            font-size: 20px;
+            transition: transform 0.3s ease;
+            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+            z-index: 2;
+        }
+
+        .date span { display: block; font-size: 12px; font-weight: bold; opacity: 0.9; }
+        .date strong { font-size: 24px; }
+
+        .content {
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 22px 26px;
+            border-radius: 18px;
+            width: 100%;
+            border: 1px border white;
+            box-shadow: 0 10px 25px rgba(15, 23, 42, 0.05);
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .content h3 { font-size: 18px; font-weight: 800; color: #1e293b; margin-bottom: 4px; }
+        .content p { color: #475569; margin-bottom: 8px; font-weight: 500; }
+        .meta { font-size: 12px; font-weight: 700; color: #0369a1; text-transform: uppercase; letter-spacing: 0.5px; }
+
+        /* ================= HOVER EFFECTS ================= */
+        .event:hover .content {
+            transform: translateX(10px);
+            background: rgba(255, 255, 255, 0.6);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+        }
+
+        .event:hover .date { transform: scale(1.1) rotate(-3deg); }
+
+        .hover-details {
+            position: absolute;
+            left: 20px;
+            right: 20px;
+            bottom: -15px;
+            background: #0369a1;
+            color: #fff;
+            padding: 10px 14px;
+            font-size: 12px;
+            font-weight: 600;
+            border-radius: 10px;
+            opacity: 0;
+            transform: translateY(10px);
+            pointer-events: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 20px rgba(3, 105, 161, 0.2);
+        }
+
+        .event:hover .hover-details { opacity: 1; transform: translateY(0); }
+
+        /* ================= COLORS ================= */
+        .blue { background: #2563eb; }
+        .purple { background: #7c3aed; }
+        .pink { background: #db2777; }
+        .green { background: #059669; }
+        .teal { background: #0d9488; }
+        .red { background: #dc2626; }
+
+        /* ================= SCROLL ANIMATION ================= */
+        .fade-in { opacity: 0; transform: translateY(30px); transition: all 0.6s ease-out; }
+        .fade-in.show { opacity: 1; transform: translateY(0); }
+
+        @media (max-width: 768px) {
+            .timeline::before { left: 38px; }
+            .date { margin-right: 15px; width: 65px; height: 65px; min-width: 65px; font-size: 16px; }
+            .date strong { font-size: 18px; }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="events-page-wrapper">
+    <div class="scenic-bg">
+        <div class="hill hill-1"></div>
+        <div class="bullet-train-container">
+            <div class="bullet-train">
+                <div class="train-head"></div>
+                <div class="speed-lines"></div>
+            </div>
+        </div>
+    </div>
+
+    <section class="main-wrapper">
+        <div class="flex justify-between items-end mb-10">
+            <div>
+                <h1 class="text-4xl font-black text-slate-900 tracking-tight drop-shadow-sm">Railway Events</h1>
+                <p class="text-slate-600 font-medium mt-1">Annual reservation activities & milestones</p>
+            </div>
+            <a href="/" data-link class="px-4 py-2 rounded-lg bg-white/40 hover:bg-white/60 text-sm font-bold text-slate-700 transition flex items-center gap-2 border border-slate-200 shadow-sm mb-1">
+                <i class="fa-solid fa-arrow-left"></i> Back
+            </a>
+        </div>
+
+        <div class="timeline">
+
+            <div class="event fade-in">
+                <div class="date blue">🚆<span>JAN</span><strong>05</strong></div>
+                <div class="content">
+                    <h3>New Year Special Train Booking</h3>
+                    <p>Advance reservation for New Year special trains.</p>
+                    <div class="meta">Online Booking</div>
+                    <div class="hover-details">Booking opens 120 days in advance.</div>
+                </div>
+            </div>
+
+            <div class="event fade-in">
+                <div class="date purple">🎫<span>FEB</span><strong>10</strong></div>
+                <div class="content">
+                    <h3>Tatkal Booking Schedule Review</h3>
+                    <p>Review of Tatkal ticket booking timings.</p>
+                    <div class="meta">All Zones</div>
+                    <div class="hover-details">Tatkal opens at 10 AM (AC) & 11 AM (Non-AC).</div>
+                </div>
+            </div>
+
+            <div class="event fade-in">
+                <div class="date pink">🎉<span>MAR</span><strong>25</strong></div>
+                <div class="content">
+                    <h3>Festival Quota Reservations</h3>
+                    <p>Special quota tickets for festivals.</p>
+                    <div class="meta">All Stations</div>
+                    <div class="hover-details">Limited seats under festival quota.</div>
+                </div>
+            </div>
+
+            <div class="event fade-in">
+                <div class="date green">☀️<span>APR</span><strong>01</strong></div>
+                <div class="content">
+                    <h3>Summer Vacation Booking Opens</h3>
+                    <p>Booking for summer holiday travel starts.</p>
+                    <div class="meta">IRCTC Portal</div>
+                    <div class="hover-details">Extra coaches added on busy routes.</div>
+                </div>
+            </div>
+
+            <div class="event fade-in">
+                <div class="date teal">👴<span>MAY</span><strong>15</strong></div>
+                <div class="content">
+                    <h3>Senior Citizen Concession Review</h3>
+                    <p>Review of fare concessions.</p>
+                    <div class="meta">Policy Review</div>
+                    <div class="hover-details">Updated concession rules applied.</div>
+                </div>
+            </div>
+
+            <div class="event fade-in">
+                <div class="date blue">📋<span>JUN</span><strong>10</strong></div>
+                <div class="content">
+                    <h3>Waiting List Clearance Review</h3>
+                    <p>Analysis of waiting list status.</p>
+                    <div class="meta">Zonal Railways</div>
+                    <div class="hover-details">Additional coaches may be added.</div>
+                </div>
+            </div>
+
+            <div class="event fade-in">
+                <div class="date teal">🌧️<span>JUL</span><strong>10</strong></div>
+                <div class="content">
+                    <h3>Monsoon Timetable Revision</h3>
+                    <p>Schedule updates due to monsoon.</p>
+                    <div class="meta">All Routes</div>
+                    <div class="hover-details">Check live train status.</div>
+                </div>
+            </div>
+
+            <div class="event fade-in">
+                <div class="date green">🇮🇳<span>AUG</span><strong>15</strong></div>
+                <div class="content">
+                    <h3>Independence Day Special Trains</h3>
+                    <p>Special trains for long weekend travel.</p>
+                    <div class="meta">Nationwide</div>
+                    <div class="hover-details">Security arrangements increased.</div>
+                </div>
+            </div>
+
+            <div class="event fade-in">
+                <div class="date purple">🛠️<span>SEP</span><strong>20</strong></div>
+                <div class="content">
+                    <h3>Reservation System Maintenance</h3>
+                    <p>System audit and performance check.</p>
+                    <div class="meta">Backend</div>
+                    <div class="hover-details">Short maintenance windows possible.</div>
+                </div>
+            </div>
+
+            <div class="event fade-in">
+                <div class="date red">🪔<span>OCT</span><strong>01</strong></div>
+                <div class="content">
+                    <h3>Diwali & Dussehra Special Trains</h3>
+                    <p>Festival rush special trains announced.</p>
+                    <div class="meta">Festival Season</div>
+                    <div class="hover-details">Heavy booking demand expected.</div>
+                </div>
+            </div>
+
+            <div class="event fade-in">
+                <div class="date blue">❄️<span>NOV</span><strong>15</strong></div>
+                <div class="content">
+                    <h3>Winter Timetable Update</h3>
+                    <p>Fog-related train schedule changes.</p>
+                    <div class="meta">Northern Routes</div>
+                    <div class="hover-details">Night trains may be rescheduled.</div>
+                </div>
+            </div>
+
+            <div class="event fade-in">
+                <div class="date green">🎄<span>DEC</span><strong>15</strong></div>
+                <div class="content">
+                    <h3>Year-End & New Year Booking</h3>
+                    <p>Christmas and New Year bookings open.</p>
+                    <div class="meta">Online Portal</div>
+                    <div class="hover-details">Final peak travel period.</div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+</div>
+
+<script>
+    /* ================= SCROLL ANIMATION ================= */
+    const items = document.querySelectorAll(".fade-in");
+
+    const observer = new IntersectionObserver(
+        entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("show");
+                }
+            });
+        },
+        { threshold: 0.1 }
+    );
+
+    items.forEach(item => observer.observe(item));
+</script>
+
+</body>
+</html>

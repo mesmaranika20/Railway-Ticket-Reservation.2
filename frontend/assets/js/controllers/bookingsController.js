@@ -16,13 +16,13 @@ import {$, createElement } from "../utils/dom.js";
 // Setup event listeners and load initial data
 // Initialize the main logic and set up all necessary event listeners
 export function initBookingsController() {
-    // Start by fetching and displaying all train data immediately upon load
+    // Start by fetching and displaying all student data immediately upon load
     loadBookings();
     
      // --- Handle Form Submissions ---
 
      
-  // Attach a listener to the 'submit' event of the train input form
+  // Attach a listener to the 'submit' event of the student input form
   $("BookingForm").addEventListener("submit", async (e) => {
      // Prevent the browser's default form submission behavior (page refresh)
      e.preventDefault();
@@ -81,7 +81,7 @@ export async function loadBookings() {
     table.style.display = "block";
 }
 
-// // Create a new train
+// // Create a new student
 export async function  createNewBooking(data) {
     const res = await apiCreateBooking(data);
     if (res.ok) {
@@ -91,7 +91,7 @@ export async function  createNewBooking(data) {
     }
 }
 
-// // Load a train into the form for editing
+// // Load a student into the form for editing
 export async function editBooking(id) {
     const booking = await apiGetOneBooking(id);
 
@@ -101,7 +101,7 @@ export async function editBooking(id) {
     window.scrollTo({ top: 0, behavior: "smooth"});
 }
 
-// // Update an existing train
+// // Update an existing student
 export async function updateBooking(id, data) {
     const res = await apiUpdateBooking(id, data);
     if (res.ok) {
@@ -112,7 +112,7 @@ export async function updateBooking(id, data) {
     }
 }
 
-// // Delete a train
+// // Delete a student
 export async function deleteBookingAction(id) {
     if (!confirm("Delete this Booking?")) return;
 

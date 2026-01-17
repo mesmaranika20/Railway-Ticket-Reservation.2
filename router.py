@@ -41,7 +41,7 @@ from core.static import serve_static
 from core.responses import send_404
 from core.middleware import add_cors_headers
 
-FRONTEND_ROUTES = {"/", "/home", "/trains", "/bookings", "/staff","/reservations", "/reports/reservations", "/docs"}
+FRONTEND_ROUTES = {"/", "/home", "/trains", "/bookings", "/staff","/reservations", "/reports/reservations","/events", "/docs"}
 
 def handle_ui_routes(handler, path):
     # Catch-all frontend routes
@@ -80,6 +80,8 @@ class RailwayRouter(BaseHTTPRequestHandler):
     
     def do_GET(self):
         path = urlparse(self.path).path
+        if path == "/events" or path == "/events.html":
+          return serve_static(self, "frontend/pages/events.html")
         # UI Routes
         if handle_ui_routes(self, path):
             return

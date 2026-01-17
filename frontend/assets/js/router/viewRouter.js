@@ -50,8 +50,11 @@ export async function router() {
   }else if (path === "/staff") {
     await loadView("/frontend/pages/staff.html");
     initStaffController();
-  
-}else {
+  }
+  else if (path === "/events") {
+        await loadView("/frontend/pages/events.html");
+  }
+  else {
     await loadView("/frontend/pages/404.html");
   }
 }
