@@ -1,5 +1,6 @@
 // Base API URL from env.js
 const API_URL = window.ENV.API_STAFF_URL;
+const API_URL = `${BASE}/staffs`;
 
 // Helper: safely parse JSON or return null
 async function safeJson(res) {
@@ -10,21 +11,21 @@ async function safeJson(res) {
   }
 }
 
-// Fetch all students
+// Fetch all staffs
 export async function apiGetAllStaff() {
   const res = await fetch(API_URL);
   if (!res.ok) return [];
   return safeJson(res);
 }
 
-// // Fetch one student by ID
+// // Fetch one staff by ID
 export async function apiGetOneStaff(id) {
   const res = await fetch(`${API_URL}/${id}`);
   if (!res.ok) return null;
   return safeJson(res);
 }
 
-// // Create a new student
+// // Create a new staff
 export function apiCreateStaff(data) {
   return fetch(API_URL, {
     method: "POST",
@@ -33,7 +34,7 @@ export function apiCreateStaff(data) {
   });
 }
 
-// // Update a student
+// // Update a staff
 export function apiUpdateStaff(id, data) {
   return fetch(`${API_URL}/${id}`, {
     method: "PUT",
@@ -42,7 +43,7 @@ export function apiUpdateStaff(id, data) {
   });
 }
 
-// // Delete a student
+// // Delete a staff
 export function apiDeleteStaff(id) {
   return fetch(`${API_URL}/${id}`, { method: "DELETE" });
 }
