@@ -18,8 +18,10 @@ export function renderBookingTable(bookings) {
     tr.innerHTML = `
       <td class="px-3 py-2 border">${b.id}</td>
       <td class="px-3 py-2 border">${b.passenger_name ?? ""}</td>
-      <td class="px-3 py-2 border">${b.seat_number ?? ""}</td>
+      <td class="px-3 py-2 border">${b.coach ?? ""}</td>
       <td class="px-3 py-2 border">${b.booking_date ?? ""}</td>
+      <td class="px-3 py-2 border">${b.payment ?? ""}</td>
+      <td class="px-3 py-2 border">${b.total_seat ?? ""}</td>
       <td class="px-3 py-2 border">
         <button class="text-blue-600 underline mr-3" data-edit="${b.id}">Edit</button>
         <button class="text-red-600 underline" data-del="${b.id}">Delete</button>

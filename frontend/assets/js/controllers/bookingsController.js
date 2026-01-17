@@ -30,7 +30,7 @@ export function initBookingsController() {
      // Collect data from the input fields using the custom '$' selector
      const data = {
       passenger_name: $("passenger_name").value.trim(),   // Get name passenger name, remove whitespace
-      seat_number: $("seat_number").value.trim(),   // Get seat number
+      coach_number: $("coach_number").value.trim(),   // Get seat number
       booking_date: $("booking_date").value.trim(),  // Get booking date
      
      };

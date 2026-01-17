@@ -31,8 +31,10 @@ def init_database():
         CREATE TABLE IF NOT EXISTS bookings (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             passenger_name TEXT,
-            seat_number TEXT,
+            coach_number TEXT,
             booking_date TEXT,
+            payment INTEGER,
+            total_seat INTEGER, 
             created_at TEXT,
             updated_at TEXT
         )

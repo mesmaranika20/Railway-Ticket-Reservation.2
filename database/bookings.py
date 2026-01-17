@@ -26,13 +26,15 @@ def db_create(data):
     cur = conn.execute(
         """
         INSERT INTO bookings
-        ( passenger_name, seat_number, booking_date, created_at)
-        VALUES ( ?, ?, ?, ?)
+        ( passenger_name,coach_number,payment,total_seat, booking_date, created_at)
+        VALUES ( ?, ?, ?, ?, ?, ?)
         """,
         (
             
             data["passenger_name"],
-            data["seat_number"],
+            data["coach_number"],
+            data["payment"],
+            data["total_seat"],
             data["booking_date"],
             now,
         )
@@ -49,12 +51,12 @@ def db_update(booking_id, data):
     conn.execute(
         """
         UPDATE bookings
-        SET  passenger_name=?, seat_number=?, booking_date=?, updated_at=?
+        SET  passenger_name=?, coach_number=?, booking_date=?, updated_at=?
         WHERE id=?
         """,
         (
             data["passenger_name"],
-            data["seat_number"],
+            data["coach_number"],
             data["booking_date"],
             now,
             booking_id,
