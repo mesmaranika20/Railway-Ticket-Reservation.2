@@ -14,7 +14,7 @@ def db_get_all():
     return [dict(r) for r in rows]
 
 
-def db_get_one(train_id int)
+def db_get_one(train_id:int)
     conn = get_connection()
     row = conn.execute(
         "SELECT * FROM trains WHERE id = ?", (train_id,)
@@ -47,7 +47,7 @@ def db_create(data: dict)
     return db_get_one(new_id)
 
 
-def db_update(train_id, data):
+def db_update(train_id:int, data:dict):
     conn = get_connection()
     now = datetime.now().isoformat()
     conn.execute(
