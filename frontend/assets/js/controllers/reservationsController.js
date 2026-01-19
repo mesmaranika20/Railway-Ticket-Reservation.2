@@ -12,7 +12,10 @@ import { $ } from "../utils/dom.js";
 export function initReservationController() {
   loadEverything();
 
-  $("reservationForm").addEventListener("submit", async (e) => {
+  const form = $("reservationForm");
+  if (!form) return; // ✅ FIX
+
+  form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
     const data = {
@@ -34,13 +37,15 @@ async function loadEverything() {
 }
 
 async function loadTrainsAndBookings() {
-  const [trains, bookings, staff] = await Promise.all([apiGetAllTrains(), apiGetAllBookings(), apiGetAllstaff()]);
+  const [trains, bookings, staff] = await Promise.all([apiGetAllTrains(), apiGetAllBookings(), apiGetAllStaff()]);
   fillReservationDropdowns(trains, bookings, staff);
 }
 
 async function loadReservationsOnly() {
   const spinner = $("loadingSpinner");
   const table = $("reservationsTableContainer");
+
+   if (!spinner || !table) return; // ✅ FIX
 
   spinner.style.display = "block";
   table.style.display = "none";
