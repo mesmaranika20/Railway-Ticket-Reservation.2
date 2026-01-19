@@ -1,9 +1,9 @@
 import { 
-    apiGetAll, 
-    apiGetOne, 
-    apiCreate, 
-    apiUpdate, 
-    apiDelete 
+    apiGetAllStaff, 
+    apiGetOneStaff, 
+    apiCreateStaff, 
+    apiUpdateStaff, 
+    apiDeleteStaff 
 } from "../services/staffService.js";
 
 import { showAlert } from "../components/Alert.js";
