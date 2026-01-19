@@ -49,7 +49,7 @@ def db_create(data: dict)
     return db_get_one(new_id)
 
 
-def db_update(booking_id, data):
+def db_update(booking_id:int, data: dict):
     conn = get_connection()
     now = datetime.now().isoformat()
     conn.execute(
