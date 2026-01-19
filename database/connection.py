@@ -10,6 +10,10 @@ def get_connection():
     conn.row_factory = sqlite3.Row
     return conn
 
+def _column_exists(conn, table, column):
+    cols = conn.execute(f"PRAGMA table_info({table})").fetchall()
+    return any(c["name"] == column for c in cols)
+
 
 def init_database():
     conn = get_connection()
