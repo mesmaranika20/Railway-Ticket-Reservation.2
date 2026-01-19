@@ -58,7 +58,7 @@ export function initBookingsController() {
   });
 }
 
-// Fetch all student data from the API and update the user interface
+// Fetch all booking data from the API and update the user interface
 export async function loadBookings() {
     // Get references to the loading spinner and the main data table elements
     const spinner = $("loadingSpinner");
@@ -68,12 +68,12 @@ export async function loadBookings() {
     spinner.style.display = "block";
     table.style.display = "none";
 
-     // Asynchronously fetch all student records from the backend API
+     // Asynchronously fetch all booking records from the backend API
      const bookings = await apiGetAllBooking();
 
-     // Store the retrieved student array in the application's global state
+     // Store the retrieved booking array in the application's global state
      setState({ bookings });
-      // Render the fetched student data into the HTML table structure
+      // Render the fetched booking data into the HTML table structure
       renderBookingTable(bookings);
 
        // Hide the spinner and show the table now that the data is loaded and displayed
@@ -81,7 +81,7 @@ export async function loadBookings() {
     table.style.display = "block";
 }
 
-// // Create a new student
+// // Create a new booking
 export async function  createNewBooking(data) {
     const res = await apiCreateBooking(data);
     if (res.ok) {
@@ -91,7 +91,7 @@ export async function  createNewBooking(data) {
     }
 }
 
-// // Load a student into the form for editing
+// // Load a booking into the form for editing
 export async function editBooking(id) {
     const booking = await apiGetOneBooking(id);
 
@@ -101,7 +101,7 @@ export async function editBooking(id) {
     window.scrollTo({ top: 0, behavior: "smooth"});
 }
 
-// // Update an existing student
+// // Update an existing booking
 export async function updateBooking(id, data) {
     const res = await apiUpdateBooking(id, data);
     if (res.ok) {
@@ -112,7 +112,7 @@ export async function updateBooking(id, data) {
     }
 }
 
-// // Delete a student
+// // Delete a booking
 export async function deleteBookingAction(id) {
     if (!confirm("Delete this Booking?")) return;
 
