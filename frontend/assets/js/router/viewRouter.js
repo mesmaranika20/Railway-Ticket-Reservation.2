@@ -1,8 +1,3 @@
-import { initTrainsController } from "../controllers/trainsController.js";
-import { initBookingsController } from "../controllers/bookingsController.js";
-import { initReservationController } from "../controllers/reservationsController.js";
-import { initReservationReportController } from "../controllers/reportController.js";
-import { initStaffController } from "../controllers/staffController.js";
 
 // LOAD A VIEW INTO TO LOAD #APP CONTRAINER
 async function loadView(path) {
