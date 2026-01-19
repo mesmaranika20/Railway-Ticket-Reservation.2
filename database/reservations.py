@@ -19,6 +19,7 @@ def reservations_create(data: dict):
     Expected data:
       - train_id (int)
       - booking_id (int)
+      - staff_id(int)
       - reserved_on (optional)
       """
     conn = get_connection()
@@ -26,8 +27,8 @@ def reservations_create(data: dict):
     reserved_on = data.get("reserved_on") or now
 
     cur = conn.execute(
-        "INSERT INTO reservations (train_id, booking_id, reserved_on, created_at) VALUES (?, ?, ?, ?)",
-        (data["train_id"], data["booking_id"], reserved_on, now)
+        "INSERT INTO reservations (train_id, booking_id,staff_id, reserved_on, created_at) VALUES (?, ?, ? ?, ?)",
+        (data["train_id"], data["booking_id"],data["staff_id"], reserved_on, now)
     )
     conn.commit()
     new_id = cur.lastrowid
