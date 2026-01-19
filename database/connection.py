@@ -65,6 +65,7 @@ def init_database():
                 updated_at TEXT,
                 FOREIGN KEY(train_id) REFERENCES trains(id),
                 FOREIGN KEY(booking_id) REFERENCES bookings(id)
+                FOREIGN KEY(satff_id) REFERENCE satff(id)
         )
     """)
 
