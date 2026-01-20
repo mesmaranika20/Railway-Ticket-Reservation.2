@@ -20,6 +20,7 @@ def reservation_report():
          FROM reservations r
         JOIN trains t ON t.id = r.train_id
          JOIN bookings b ON b.id = r.booking_id
+         JOIN staff b ON b.id = r.staff_id
         ORDER BY r.id DESC;
      """).fetchall()
     conn.close()

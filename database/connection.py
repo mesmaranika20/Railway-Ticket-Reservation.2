@@ -10,6 +10,10 @@ def get_connection():
     conn.row_factory = sqlite3.Row
     return conn
 
+def _column_exists(conn, table, column):
+    cols = conn.execute(f"PRAGMA table_info({table})").fetchall()
+    return any(c["name"] == column for c in cols)
+
 
 def init_database():
     conn = get_connection()
@@ -61,8 +65,13 @@ def init_database():
                 created_at TEXT,
                 updated_at TEXT,
                 FOREIGN KEY(train_id) REFERENCES trains(id),
+<<<<<<< HEAD
                 FOREIGN KEY(booking_id) REFERENCES bookings(id),
                  FOREIGN KEY(staff_id) REFERENCES staff(id)
+=======
+                FOREIGN KEY(booking_id) REFERENCES bookings(id)
+                FOREIGN KEY(satff_id) REFERENCE satff(id)
+>>>>>>> bd295e376fa216c034bc31a9854e18995234de50
         )
     """)
 

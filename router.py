@@ -66,8 +66,26 @@ def handle_ui_routes(handler, path):
     if path == "/openapi.yaml":
         serve_static(handler, "openapi.yaml")
         return True
+
+    
+    # Dynamic SPA routes (profiles pages)
+    # e.g. /profiles/1 should still load index.html and let the SPA router decide
+    if path.startswith("/events/"):
+        serve_static(handler, "frontend/pages/index.html")
+        return True
     
     return False
+
+def _last_path_id_or_404(handler, path):
+    """
+    Extract the last path segment and ensure it's a number.
+    If it's not a number, return None after sending 404 (no crash).
+    """
+    last = path.split("/")[-1]
+    if not last.isdigit():
+        send_404(handler)
+        return None
+    return int(last)
 
 class RailwayRouter(BaseHTTPRequestHandler):
     
@@ -77,7 +95,9 @@ class RailwayRouter(BaseHTTPRequestHandler):
         self.send_response(200)
         add_cors_headers(self)
         self.end_headers()
-    
+    # ---------------------------
+    # READ (GET)
+    # ---------------------------
     def do_GET(self):
         path = urlparse(self.path).path
         if path == "/events" or path == "/events.html":
@@ -85,7 +105,10 @@ class RailwayRouter(BaseHTTPRequestHandler):
         # UI Routes
         if handle_ui_routes(self, path):
             return
-        
+
+          # ---------------------------
+        # TRAINS
+        # ---------------------------
         
         # API: List trains
         if path == "/api/trains":
@@ -93,39 +116,62 @@ class RailwayRouter(BaseHTTPRequestHandler):
         
         # API: Get train by id
         if path.startswith("/api/trains/"):
-           train_id = int(path.split("/")[-1])
+           train_id = _last_path_id_or_404(self, path)
+            if train_id is None:
+                return
            return get_train(self, train_id)
-        
+
+        # ---------------------------
+        # BOOKINGS
+        # ---------------------------
         # API: List bookings
         if path == "/api/bookings":
            return get_all_bookings(self)
         
         # API: Get booking by id
         if path.startswith("/api/bookings/"):
-            booking_id = int(path.split("/")[-1])
+            booking_id =  _last_path_id_or_404(self, path)
+                if bookings_id is None:
+                return
             return get_booking(self, booking_id)
-        
+
+         # ---------------------------
+        # RESERVATIONS
+        # ---------------------------
         if path == "/api/reservations":
             return get_all_reservations(self)
 
         if path.startswith("/api/reservations/"):
-            reservation_id = int(path.split("/")[-1])
+            reservation_id = _last_path_id_or_404(self, path)
+            if  reservation_id is None:
+                return
             return get_reservation(self, reservation_id)
 
+         # ---------------------------
+        # REPORTS (JOIN)
+        # ---------------------------
         if path == "/api/reports/reservations":
             return get_reservation_report(self)    
-        
+
+        # ---------------------------
+        # STAFF
+        # --------------------------- 
         # API: List staff
         if path == "/api/staff":
             return get_all_staff(self)
         
         # API: Get staff by id
         if path.startswith("/api/staff/"):
-            staff_id = int(path.split("/")[-1])
+            staff_id = _last_path_id_or_404(self, path)
+            if staff_id is None:
+                return
             return get_staff(self, staff_id)
         
         return send_404(self)
-    
+
+    # ---------------------------
+    # CREATE (POST)
+    # ---------------------------
     def do_POST(self):
         path = urlparse(self.path).path
         
@@ -146,49 +192,71 @@ class RailwayRouter(BaseHTTPRequestHandler):
             return create_staff(self)
         
         return send_404(self)
-    
+
+     # ---------------------------
+    # UPDATE (PUT)
+    # ---------------------------
     def do_PUT(self):
-        parsed = urlparse(self.path)
-        path = parsed.path
-        
+        path = urlparse(self.path).path
+    
+     # TRAINS    
     #     # API: Update train
         if path.startswith("/api/trains/"):
-            train_id = int(path.split("/")[-1])
+            train_id =  _last_path_id_or_404(self, path)
+            if train_id is None:
+                return
             return update_train(self, train_id)
-        
-    #     # API: Update booking
+
+        #BOOKINGS
+         # API: Update booking
         if path.startswith("/api/bookings/"):
-            booking_id = int(path.split("/")[-1])
+            booking_id = _last_path_id_or_404(self, path)
+            if booking_id is None:
+                return
             return update_booking(self, booking_id)
-        
-    #     # API: Update staff
+
+        #UPDATE
+         # API: Update staff
         if path.startswith("/api/staff/"):
-            staff_id = int(path.split("/")[-1])
+            staff_id =_last_path_id_or_404(self, path)
+            if staff_id is None :
+                return
             return update_staff(self, staff_id)
         
         return send_404(self)
+
     
+    # ---------------------------
+    # DELETE (DELETE)
+    # ---------------------------
     def do_DELETE(self):
-        parsed = urlparse(self.path)
-        path = parsed.path
+        parsed = urlparse(self.path).path
         
     #     # API: Delete train
         if path.startswith("/api/trains/"):
-            train_id = int(path.split("/")[-1])
+            train_id =  _last_path_id_or_404(self, path)
+             if train_id is None:
+                return
             return delete_train(self, train_id)
         
     #     # API: Cancel booking
         if path.startswith("/api/bookings/"):
-            booking_id = int(path.split("/")[-1])
+            booking_id = _last_path_id_or_404(self, path)
+             if booking_id is None:
+                return
             return delete_booking(self, booking_id)
         
         if self.path.startswith("/api/reservations"):
-            reservation_id = int(self.path.split("/")[-1])
+            reservation_id = _last_path_id_or_404(self, path)
+             if reservation_id is None:
+                return
             return delete_reservation(self,reservation_id)
         
     #     # API: Delete staff
         if path.startswith("/api/staff/"):
-            staff_id = int(path.split("/")[-1])
+            staff_id = _last_path_id_or_404(self, path)
+             if staff_id is None:
+                return
             return delete_staff(self, staff_id)
         
         return send_404(self)

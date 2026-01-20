@@ -19,6 +19,11 @@ def create_reservation(handler):
     new_reservation = service_create(data)
     return send_json(handler, 201, new_reservation)
 
+def update_reservation(handler, reservation_id):
+    data = parse_json_body(handler)
+    updated = service_update(reservation_id, data)
+    return send_json(handler, 200, updated) if updated else send_404(handler)
+
 def delete_reservation(handler, reservation_id):
     deleted = service_delete(reservation_id)
     return send_json(handler, 200, {"deleted": True}) if deleted else send_404(handler)

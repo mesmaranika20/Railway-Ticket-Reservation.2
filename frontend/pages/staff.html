@@ -1,67 +1,162 @@
-1  <div class="max-w-3xl mx-auto p-6 main-wrapper page-staff">
-
-
-  <div class="flex items-center justify-between mb-6">
-    <h1 class="text-3xl font-bold">Staff Management</h1>
-    <a href="/" data-link class="text-sm text-blue-600 underline">← Back to Home</a>
-  </div>
-
-  <!-- Add / Edit Staff Form -->
-  <div class="bg-white p-5 rounded shadow mb-8">
-    <h2 class="font-semibold mb-3 text-lg">Add New Staff</h2>
-    <form id="StaffForm" class="space-y-3">
-      <input type="text" id="name" placeholder="Staff Name" required class="w-full border rounded px-3 py-2">
-      <input type="text" id="role" placeholder="Role" required class="w-full border rounded px-3 py-2">
-      <input type="text" id="contact" placeholder="Contact Number" required class="w-full border rounded px-3 py-2">
-
-      <div class="flex space-x-2">
-        <button type="submit" id="submitBtn"
-          class="flex-1 bg-blue-500 hover:bg-blue-600 text-white py-2 rounded">
-          Add Staff
-        </button>
-
-        <button type="button" id="cancelBtn"
-          class="flex-1 bg-gray-400 hover:bg-gray-500 text-white py-2 rounded hidden">
-          Cancel
-        </button>
-      </div>
-    </form>
-  </div>
-
-  <!-- Staff Table -->
-  <div class="bg-white p-5 rounded shadow">
-    <h2 class="font-semibold mb-4 text-lg">All Staff</h2>
-
-    <div id="loadingSpinner" class="text-center py-4">
-      <div class="animate-spin rounded-full h-6 w-6 border-b-2 border-blue-500 mx-auto"></div>
+<div class="staff-page-wrapper min-h-screen py-12 px-4 relative overflow-hidden">
+    
+    <div class="scenic-bg">
+        <div class="hill hill-1"></div>
+        <div class="bullet-train-container">
+            <div class="bullet-train">
+                <div class="train-head"></div>
+                <div class="speed-lines"></div>
+            </div>
+        </div>
     </div>
 
-    <div id="StaffTableContainer" class="hidden overflow-x-auto">
-      <table class="min-w-full text-left border">
-        <thead class="bg-gray-200">
-          <tr>
-            <th class="px-3 py-2">ID</th>
-            <th class="px-3 py-2">Name</th>
-            <th class="px-3 py-2">Role</th>
-            <th class="px-3 py-2">Contact</th>
-            <th class="px-3 py-2">Actions</th>
-          </tr>
-        </thead>
-        <tbody id="StaffTableBody"></tbody>
-      </table>
+    <div class="max-w-4xl mx-auto main-wrapper page-staff relative z-10">
 
-      <p id="noStaffs" class="text-center text-gray-500 mt-3 hidden">
-        No staff found. Add one using the form above.
-      </p>
+        <div class="page-header flex justify-between items-center mb-8">
+            <div>
+                <h1 class="text-3xl font-black text-slate-900 tracking-tight drop-shadow-sm">Staff Management</h1>
+                <p class="text-sm text-slate-600 mt-1 font-medium">Manage employee records and roles</p>
+            </div>
+            <a href="/" data-link class="px-4 py-2 rounded-lg bg-white/60 hover:bg-white/80 text-sm font-bold text-slate-700 transition flex items-center gap-2 border border-slate-200 shadow-sm">
+                <i class="fa-solid fa-arrow-left"></i> Back to Dashboard
+            </a>
+        </div>
+
+        <div class="form-card mb-8 p-6 rounded-2xl border border-white bg-white/40 backdrop-blur-md shadow-xl shadow-blue-900/5">
+            <h2 class="font-bold mb-4 text-lg text-slate-800 border-b border-blue-200/30 pb-2">Add New Staff</h2>
+            <form id="StaffForm" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <input type="text" id="name" placeholder="Staff Name" required 
+                    class="w-full bg-white/60 border border-blue-100 rounded-lg px-4 py-2.5 text-slate-900 placeholder-slate-400 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 transition">
+                
+                <input type="text" id="role" placeholder="Role / Position" required 
+                    class="w-full bg-white/60 border border-blue-100 rounded-lg px-4 py-2.5 text-slate-900 placeholder-slate-400 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 transition">
+                
+                <input type="text" id="contact" placeholder="Contact Number" required 
+                    class="w-full md:col-span-2 bg-white/60 border border-blue-100 rounded-lg px-4 py-2.5 text-slate-900 placeholder-slate-400 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 transition">
+
+                <div class="md:col-span-2 flex space-x-3 mt-2">
+                    <button type="submit" id="submitBtn" class="flex-1 bg-blue-600 hover:bg-blue-500 text-white font-bold py-2.5 rounded-lg transition shadow-lg">
+                        <i class="fa-solid fa-user-plus mr-2"></i> Add Staff
+                    </button>
+
+                    <button type="button" id="cancelBtn" class="flex-1 bg-slate-200 hover:bg-slate-300 text-slate-700 font-medium py-2.5 rounded-lg hidden transition border border-slate-300">
+                        Cancel
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <div class="table-card p-6 rounded-2xl border border-white bg-white/40 backdrop-blur-md shadow-xl shadow-blue-900/5">
+            <h2 class="font-bold mb-4 text-lg text-slate-800">All Staff Members</h2>
+
+            <div id="loadingSpinner" class="text-center py-8">
+                <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto"></div>
+                <p class="text-slate-500 text-sm mt-2">Loading staff records...</p>
+            </div>
+
+            <div id="StaffTableContainer" class="hidden overflow-x-auto rounded-xl border border-blue-100 bg-white/50">
+                <table class="min-w-full text-left">
+                    <thead>
+                        <tr class="bg-blue-50/50">
+                            <th class="px-4 py-3 font-bold text-blue-700">ID</th>
+                            <th class="px-4 py-3 font-bold text-blue-700">Name</th>
+                            <th class="px-4 py-3 font-bold text-blue-700">Role</th>
+                            <th class="px-4 py-3 font-bold text-blue-700">Contact</th>
+                            <th class="px-4 py-3 font-bold text-blue-700 text-right">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="StaffTableBody" class="divide-y divide-blue-50 text-slate-700">
+                        </tbody>
+                </table>
+
+                <p id="noStaffs" class="text-center text-slate-500 py-8 hidden font-medium">
+                    No staff found. Add one using the form above.
+                </p>
+            </div>
+        </div>
+
+        <div id="alertContainer" class="fixed top-4 right-4 space-y-2 z-50"></div>
     </div>
-
-    <!-- Added New  -->
-    <div class="page-bg staff-bg">  </div>
-    <div class="page-content">   </div>
-    <h2>Staff Management</h2>
-
-
-  </div>
-
-  <div id="alertContainer" class="fixed top-4 right-4 space-y-2 z-50"></div>
 </div>
+
+<style>
+    /* 1. Global Background: Removed all Unsplash images */
+    .staff-page-wrapper {
+        background: linear-gradient(180deg, #f0f9ff 0%, #e0f2fe 50%, #bae6fd 100%);
+        background-attachment: fixed;
+    }
+
+    /* 2. Scenic Elements */
+    .scenic-bg {
+        position: fixed;
+        bottom: 0; left: 0; width: 100%; height: 60vh;
+        z-index: 0; pointer-events: none;
+    }
+
+    .hill {
+        position: absolute; bottom: 0; width: 200%; height: 100%;
+        background-repeat: repeat-x; opacity: 0.6;
+    }
+
+    .hill-1 {
+        background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%237dd3fc" d="M0,160L80,176C160,192,320,224,480,213.3C640,203,800,149,960,144C1120,139,1280,181,1360,202.7L1440,224L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z"></path></svg>');
+        animation: moveHill 60s linear infinite;
+        bottom: -50px;
+    }
+
+    .bullet-train-container {
+        position: absolute; bottom: 120px; width: 100%; height: 2px;
+        background: rgba(3, 105, 161, 0.1);
+    }
+
+    .bullet-train {
+        position: absolute; top: -15px; left: -500px;
+        display: flex; align-items: center;
+        animation: highSpeedPass 12s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+    }
+
+    .train-head {
+        width: 70px; height: 20px;
+        background: #0284c7;
+        border-radius: 50% 12px 3px 3px;
+    }
+
+    .speed-lines {
+        width: 120px; height: 15px;
+        background: linear-gradient(90deg, transparent, rgba(2, 132, 199, 0.2));
+        margin-left: -5px;
+    }
+
+    @keyframes moveHill { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    @keyframes highSpeedPass { 0% { transform: translateX(-100%); } 30%, 100% { transform: translateX(200vw); } }
+
+    /* 3. Card & Table Styling Refinements */
+    .form-card, .table-card {
+        background-color: rgba(255, 255, 255, 0.45) !important; /* Semi-transparent white */
+        border: 1px solid rgba(255, 255, 255, 0.8) !important;
+    }
+
+    input::placeholder {
+        color: #94a3b8 !important;
+    }
+
+    #StaffTableBody tr:hover {
+        background: rgba(241, 245, 249, 0.8);
+    }
+
+    .btn-action {
+        background: rgba(255, 255, 255, 0.8);
+        padding: 6px 10px;
+        border-radius: 8px;
+        transition: 0.2s;
+        border: 1px solid #e2e8f0;
+        color: #475569;
+    }
+
+    .btn-action:hover {
+        background: #f8fafc;
+        border-color: #3b82f6;
+        color: #3b82f6;
+        transform: translateY(-1px);
+    }
+</style>

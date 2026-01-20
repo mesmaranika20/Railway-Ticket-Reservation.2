@@ -1,6 +1,6 @@
 import { $ } from "../utils/dom.js";
 
-export function fillReservationDropdowns(trains, bookings) {
+export function fillReservationDropdowns(trains, bookings, staff) {
   const trainSel = $("train_id");
   const bookingSel = $("booking_id");
   const staffSel = $("staff_id");
@@ -22,6 +22,7 @@ export function fillReservationDropdowns(trains, bookings) {
     opt.textContent = `${b.passenger_name} (ID: ${b.id})`;
     bookingSel.appendChild(opt);
   });
+<<<<<<< HEAD
   
   (staffs || []).forEach(s => {
     const opt = document.createElement("option");
@@ -30,3 +31,13 @@ export function fillReservationDropdowns(trains, bookings) {
     staffSel.appendChild(opt);
   });
 }
+=======
+
+   (staff || []).forEach(b => {
+    const opt = document.createElement("option");
+    opt.value = s.id;
+    opt.textContent = `${s.name} (ID: ${s.id})`;
+    bookingSel.appendChild(opt);
+  });
+}
+>>>>>>> bd295e376fa216c034bc31a9854e18995234de50

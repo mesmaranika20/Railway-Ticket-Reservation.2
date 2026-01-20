@@ -13,4 +13,8 @@ export function fillStaffForm(staff) {
    $("contact").value = staff.contact;
    $("cancelBtn").classList.remove("hidden");
    $("submitBtn").textContent = "Update Menu";
+<<<<<<< HEAD
  }
+=======
+ }
+>>>>>>> bd295e376fa216c034bc31a9854e18995234de50

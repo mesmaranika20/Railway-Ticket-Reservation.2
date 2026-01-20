@@ -11,7 +11,7 @@ def db_get_all():
     return [dict(r) for r in rows]
 
 
-def db_get_one(staff_id):
+def db_get_one(staff_id:int)
     conn = get_connection()
     row = conn.execute(
         "SELECT * FROM staff WHERE id = ?", (staff_id,)
@@ -20,7 +20,7 @@ def db_get_one(staff_id):
     return dict(row) if row else None
 
 
-def db_create(data):
+def db_create(data: dict)
     conn = get_connection()
     now = datetime.now().isoformat()
     cur = conn.execute(
@@ -42,7 +42,7 @@ def db_create(data):
     return db_get_one(new_id)
 
 
-def db_update(staff_id, data):
+def db_update(staff_id: int, data: dict)
     conn = get_connection()
     now = datetime.now().isoformat()
     conn.execute(
@@ -64,7 +64,7 @@ def db_update(staff_id, data):
     return db_get_one(staff_id)
 
 
-def db_delete(staff_id):
+def db_delete(staff_id: int):
     staff = db_get_one(staff_id)
     if not staff:
         return None
