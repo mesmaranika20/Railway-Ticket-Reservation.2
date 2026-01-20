@@ -12,7 +12,7 @@ export function renderTrainTable(trains) {
   body.innerHTML = "";
 
   // Check if the student array is empty
-  if (trains.length === 0) {
+  if (!trains || trains.length === 0) {
     // If no students are found, display the 'no students' message and stop execution
     noTrains.style.display = "block";
     return;
