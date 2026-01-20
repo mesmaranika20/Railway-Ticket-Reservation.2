@@ -56,11 +56,13 @@ def init_database():
               id INTEGER PRIMARY KEY AUTOINCREMENT,
               train_id INTEGER NOT NULL,
                booking_id INTEGER NOT NULL,
+                staff_id INTEGER NOT NULL,
                 reserved_on TEXT,
                 created_at TEXT,
                 updated_at TEXT,
                 FOREIGN KEY(train_id) REFERENCES trains(id),
-                FOREIGN KEY(booking_id) REFERENCES bookings(id)
+                FOREIGN KEY(booking_id) REFERENCES bookings(id),
+                 FOREIGN KEY(staff_id) REFERENCES staff(id)
         )
     """)
 
