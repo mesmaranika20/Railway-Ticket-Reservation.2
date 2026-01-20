@@ -4,10 +4,6 @@ from datetime import datetime
 from .connection import get_connection
 
 
-# -----------------------------
-# BOOKINGS CRUD
-# -----------------------------
-
 def db_get_all():
     conn = get_connection()
     rows = conn.execute("SELECT * FROM bookings ORDER BY id DESC").fetchall()
@@ -49,7 +45,7 @@ def db_create(data: dict):
     return db_get_one(new_id)
 
 
-def db_update(booking_id:int, data: dict):
+def db_update(booking_id: int, data: dict):
     conn = get_connection()
     now = datetime.now().isoformat()
     conn.execute(
@@ -74,7 +70,7 @@ def db_update(booking_id:int, data: dict):
     return db_get_one(booking_id)
 
 
-def db_delete(booking_id : int)
+def db_delete(booking_id: int):
     booking = db_get_one(booking_id)
     if not booking:
         return None
