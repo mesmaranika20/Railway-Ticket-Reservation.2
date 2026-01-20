@@ -15,7 +15,7 @@ def db_get_all():
     return [dict(r) for r in rows]
 
 
-def db_get_one(booking_id: int)
+def db_get_one(booking_id: int):
     conn = get_connection()
     row = conn.execute(
         "SELECT * FROM bookings WHERE id = ?", (booking_id,)
@@ -24,7 +24,7 @@ def db_get_one(booking_id: int)
     return dict(row) if row else None
 
 
-def db_create(data: dict)
+def db_create(data: dict):
     conn = get_connection()
     now = datetime.now().isoformat()
     cur = conn.execute(

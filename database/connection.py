@@ -37,8 +37,8 @@ def init_database():
             passenger_name TEXT,
             coach_number TEXT,
             booking_date TEXT,
+            total_seats INTEGER,
             payment INTEGER,
-            total_seat INTEGER, 
             created_at TEXT,
             updated_at TEXT
         )
@@ -65,13 +65,8 @@ def init_database():
                 created_at TEXT,
                 updated_at TEXT,
                 FOREIGN KEY(train_id) REFERENCES trains(id),
-<<<<<<< HEAD
-                FOREIGN KEY(booking_id) REFERENCES bookings(id),
-                 FOREIGN KEY(staff_id) REFERENCES staff(id)
-=======
                 FOREIGN KEY(booking_id) REFERENCES bookings(id)
-                FOREIGN KEY(satff_id) REFERENCE satff(id)
->>>>>>> bd295e376fa216c034bc31a9854e18995234de50
+                FOREIGN KEY(staff_id) REFERENCES staff(id)
         )
     """)
 
