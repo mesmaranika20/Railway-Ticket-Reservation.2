@@ -2,6 +2,11 @@
 let state = {
   editingId: null,   // which train is being edited
   trains: [],       // list of all trains
+  bookings: [],     // list of all trains
+  staff: [],         // list of all trains
+  reservations: [],   // list of all trains
+  editingId: null,
+  editingBookingId: null,
 
 };
 

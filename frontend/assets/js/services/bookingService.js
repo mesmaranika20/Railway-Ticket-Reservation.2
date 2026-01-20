@@ -1,8 +1,7 @@
-const BASE = window.ENV.API_BASE_URL.replace("/trains", "");
 const API_URL = `${BASE}/bookings`;
 
 async function safeJson(res) {
-  try { return await res.json(); } catch { return null; }
+  try { return await res.json(); } catch (_)  { return null; }
 }
 
 export async function apiGetAllBooking() {
