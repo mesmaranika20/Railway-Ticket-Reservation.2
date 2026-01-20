@@ -1,12 +1,11 @@
 import { apiGetAll as apiGetAllReservations, apiCreate, apiDelete } from "../services/reservationService.js";
-import { apiGetAll as apiGetAllTrains } from "../services/trainService.js";
-import { apiGetAll as apiGetAllBookings } from "../services/bookingService.js";
-import { apiGetAll as apiGetAllstaff } from "../services/staffService.js";
+import { apiGetAllTrain as apiGetAllTrains } from "../services/trainService.js";
+import { apiGetAllBooking as apiGetAllBookings } from "../services/bookingService.js";
+import { apiGetAllStaff as apiGetAllStaff } from "../services/staffService.js";
 
 import { showAlert } from "../components/Alert.js";
 import { renderReservationTable } from "../components/ReservationTable.js";
 import { fillReservationDropdowns } from "../components/ReservationForm.js";
-
 import { $ } from "../utils/dom.js";
 
 export function initReservationController() {
@@ -37,7 +36,11 @@ async function loadEverything() {
 }
 
 async function loadTrainsAndBookings() {
-  const [trains, bookings, staff] = await Promise.all([apiGetAllTrains(), apiGetAllBookings(), apiGetAllStaff()]);
+  const [trains, bookings, staff] = await Promise.all([
+    apiGetAllTrains(),
+    apiGetAllBookings(),
+    apiGetAllStaff()
+  ]);
   fillReservationDropdowns(trains, bookings, staff);
 }
 
@@ -45,7 +48,7 @@ async function loadReservationsOnly() {
   const spinner = $("loadingSpinner");
   const table = $("reservationsTableContainer");
 
-   if (!spinner || !table) return; // ✅ FIX
+  if (!spinner || !table) return; // ✅ FIX
 
   spinner.style.display = "block";
   table.style.display = "none";

@@ -16,13 +16,13 @@ import {$, createElement } from "../utils/dom.js";
 // Setup event listeners and load initial data
 // Initialize the main logic and set up all necessary event listeners
 export function initBookingsController() {
-    // Start by fetching and displaying all train data immediately upon load
+    // Start by fetching and displaying all student data immediately upon load
     loadBookings();
     
      // --- Handle Form Submissions ---
 
      
-  // Attach a listener to the 'submit' event of the train input form
+  // Attach a listener to the 'submit' event of the student input form
   $("BookingForm").addEventListener("submit", async (e) => {
      // Prevent the browser's default form submission behavior (page refresh)
      e.preventDefault();
@@ -58,7 +58,7 @@ export function initBookingsController() {
   });
 }
 
-// Fetch all booking data from the API and update the user interface
+// Fetch all student data from the API and update the user interface
 export async function loadBookings() {
     // Get references to the loading spinner and the main data table elements
     const spinner = $("loadingSpinner");
@@ -68,12 +68,12 @@ export async function loadBookings() {
     spinner.style.display = "block";
     table.style.display = "none";
 
-     // Asynchronously fetch all booking records from the backend API
+     // Asynchronously fetch all student records from the backend API
      const bookings = await apiGetAllBooking();
 
-     // Store the retrieved booking array in the application's global state
+     // Store the retrieved student array in the application's global state
      setState({ bookings });
-      // Render the fetched booking data into the HTML table structure
+      // Render the fetched student data into the HTML table structure
       renderBookingTable(bookings);
 
        // Hide the spinner and show the table now that the data is loaded and displayed
@@ -81,7 +81,7 @@ export async function loadBookings() {
     table.style.display = "block";
 }
 
-// // Create a new booking
+// // Create a new student
 export async function  createNewBooking(data) {
     const res = await apiCreateBooking(data);
     if (res.ok) {
@@ -91,7 +91,7 @@ export async function  createNewBooking(data) {
     }
 }
 
-// // Load a booking into the form for editing
+// // Load a student into the form for editing
 export async function editBooking(id) {
     const booking = await apiGetOneBooking(id);
 
@@ -101,7 +101,7 @@ export async function editBooking(id) {
     window.scrollTo({ top: 0, behavior: "smooth"});
 }
 
-// // Update an existing booking
+// // Update an existing student
 export async function updateBooking(id, data) {
     const res = await apiUpdateBooking(id, data);
     if (res.ok) {
@@ -112,7 +112,7 @@ export async function updateBooking(id, data) {
     }
 }
 
-// // Delete a booking
+// // Delete a student
 export async function deleteBookingAction(id) {
     if (!confirm("Delete this Booking?")) return;
 

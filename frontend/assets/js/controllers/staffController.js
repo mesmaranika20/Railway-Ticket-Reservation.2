@@ -8,7 +8,7 @@ import {
 
 import { showAlert } from "../components/Alert.js";
 import { renderStaffTable } from "../components/StaffTable.js";
-import { resetStaffForm, fillStaffForm } from "../components/StaffForm.js";
+import { resetForm, StaffForm } from "../components/StaffForm.js";
 
 import { setState, getState } from "../state/store.js";
 import { $, createElement } from "../utils/dom.js";
@@ -22,15 +22,15 @@ export function initStaffController() {
   // --- Handle Form Submissions ---
 
   // Attach a listener to the 'submit' event of the Staff input form
-  $("staffForm").addEventListener("submit", async (e) => {
+  $("StaffForm").addEventListener("submit", async (e) => {
     // Prevent the browser's default form submission behavior (page refresh)
     e.preventDefault();
 
     // Collect data from the input fields using the custom '$' selector
     const data = {
       name: $("name").value.trim(),   // Get name value, remove whitespace
-      email: $("role").value.trim(), // Get email value
-      age: $("contact").value.trim(), // Get age value
+      role: $("role").value.trim(), // Get email value
+      contact: $("contact").value.trim(), // Get age value
     };
 
     // Check the application state to see if we are currently editing an existing record
@@ -49,7 +49,7 @@ export function initStaffController() {
     // Clear the editing state (set the ID to null)
     setState({ editingId: null });
     // Clear all input fields in the form
-    resetStaffForm();
+    resetForm();
   });
 }
 
@@ -58,14 +58,14 @@ export function initStaffController() {
 export async function loadStaffs() {
   // Get references to the loading spinner and the main data table elements
   const spinner = $("loadingSpinner");
-  const table = $("staffsTableContainer");
+  const table = $("StaffTableContainer");
 
   // Show the spinner and hide the table to indicate a loading state
   spinner.style.display = "block";
   table.style.display = "none";
 
   // Asynchronously fetch all Staff records from the backend API
-  const staffs = await apiGetAll();
+  const staffs = await apiGetAllStaff();
 
   // Store the retrieved Staff array in the application's global state
   setState({ staffs });
@@ -80,30 +80,30 @@ export async function loadStaffs() {
 
 // Create a new Staff
 export async function createNewStaff(data) {
-  const res = await apiCreate(data);
+  const res = await apiCreateStaff(data);
   if (res.ok) {
     showAlert("Staff added!");
-    resetStaffForm();
+    resetForm();
     loadStaffs();
   }
 }
 
 // Load a Staff into the form for editing
 export async function editStaff(id) {
-  const staff = await apiGetOne(id);
+  const staff = await apiGetOneStaff(id);
 
   setState({ editingId: id });
-  fillStaffForm(staff);
+  StaffForm(staff);
 
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
 // Update an existing Staff
 export async function updateStaff(id, data) {
-  const res = await apiUpdate(id, data);
+  const res = await apiUpdateStaff(id, data);
   if (res.ok) {
     showAlert("Updated!");
-    resetStaffForm();
+    resetForm();
     setState({ editingId: null });
     loadStaffs();
   }
@@ -113,7 +113,7 @@ export async function updateStaff(id, data) {
 export async function deleteStaffAction(id) {
   if (!confirm("Delete this staff?")) return;
 
-  const res = await apiDelete(id);
+  const res = await apiDeleteStaff(id);
  	if (res.ok) {
     showAlert("Deleted!");
     loadStaffs();
