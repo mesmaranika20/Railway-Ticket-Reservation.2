@@ -16,13 +16,13 @@ import {$, createElement } from "../utils/dom.js";
 // Setup event listeners and load initial data
 // Initialize the main logic and set up all necessary event listeners
 export function initTrainsController() {
-    // Start by fetching and displaying all student data immediately upon load
+    // Start by fetching and displaying all train data immediately upon load
     loadTrains();
     
      // --- Handle Form Submissions ---
 
      
-  // Attach a listener to the 'submit' event of the student input form
+  // Attach a listener to the 'submit' event of the train input form
   $("TrainForm").addEventListener("submit", async (e) => {
      // Prevent the browser's default form submission behavior (page refresh)
      e.preventDefault();
@@ -57,7 +57,7 @@ export function initTrainsController() {
   });
 }
 
-// Fetch all student data from the API and update the user interface
+// Fetch all train data from the API and update the user interface
 export async function loadTrains() {
     // Get references to the loading spinner and the main data table elements
     const spinner = $("loadingSpinner");
@@ -67,12 +67,12 @@ export async function loadTrains() {
     spinner.style.display = "block";
     table.style.display = "none";
 
-     // Asynchronously fetch all student records from the backend API
+     // Asynchronously fetch all train records from the backend API
      const trains = await apiGetAllTrain();
 
-     // Store the retrieved student array in the application's global state
+     // Store the retrieved train array in the application's global state
      setState({ trains });
-      // Render the fetched student data into the HTML table structure
+      // Render the fetched train data into the HTML table structure
       renderTrainTable(trains);
 
        // Hide the spinner and show the table now that the data is loaded and displayed
@@ -80,7 +80,7 @@ export async function loadTrains() {
     table.style.display = "block";
 }
 
-// // Create a new student
+// // Create a new train
 export async function  createNewTrain(data) {
     const res = await apiCreateTrain(data);
     if (res.ok) {
@@ -90,7 +90,7 @@ export async function  createNewTrain(data) {
     }
 }
 
-// // Load a student into the form for editing
+// // Load a train into the form for editing
 export async function editTrain(id) {
     const train = await apiGetOneTrain(id);
 
@@ -100,7 +100,7 @@ export async function editTrain(id) {
     window.scrollTo({ top: 0, behavior: "smooth"});
 }
 
-// // Update an existing student
+// // Update an existing train
 export async function updateTrain(id, data) {
     const res = await apiUpdateTrain(id, data);
     if (res.ok) {
@@ -111,7 +111,7 @@ export async function updateTrain(id, data) {
     }
 }
 
-// // Delete a student
+// // Delete a train
 export async function deleteTrainAction(id) {
     if (!confirm("Delete this Train?")) return;
 

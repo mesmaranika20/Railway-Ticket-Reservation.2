@@ -46,7 +46,7 @@ class TestApiSmoke(unittest.TestCase):
     def test_api_railway_returns_200(self):
         """
         This test checks one thing:
-        - When we call /api/students, the server responds correctly
+        - When we call /api/trains, the server responds correctly
         """
 
         # Build the API URL using the test server port

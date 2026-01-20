@@ -16,13 +16,13 @@ import {$, createElement } from "../utils/dom.js";
 // Setup event listeners and load initial data
 // Initialize the main logic and set up all necessary event listeners
 export function initBookingsController() {
-    // Start by fetching and displaying all student data immediately upon load
+    // Start by fetching and displaying all train data immediately upon load
     loadBookings();
     
      // --- Handle Form Submissions ---
 
      
-  // Attach a listener to the 'submit' event of the student input form
+  // Attach a listener to the 'submit' event of the train input form
   $("BookingForm").addEventListener("submit", async (e) => {
      // Prevent the browser's default form submission behavior (page refresh)
      e.preventDefault();

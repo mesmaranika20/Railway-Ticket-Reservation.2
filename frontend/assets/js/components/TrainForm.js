@@ -1,6 +1,6 @@
 import { $, createElement } from "../utils/dom.js";
 
-// Resets the input form to its default state for creating a new student
+// Resets the input form to its default state for creating a new train
 export function resetForm() {
   // Use the native .reset() method on the HTML form element
   $("TrainForm").reset();
@@ -12,9 +12,9 @@ export function resetForm() {
   $("cancelBtn").classList.add("hidden");
 }
 
-// Populates the input form fields with data from a selected student object (for editing)
+// Populates the input form fields with data from a selected train object (for editing)
 export function trainForm(train) {
-  // Fill each input field with the corresponding property from the student data
+  // Fill each input field with the corresponding property from the train data
   $("train_name").value = train.train_name ?? "" ;
   $("source").value = train.source  ?? "" ;
   $("destination").value = train.destination  ?? "" ;

@@ -10,21 +10,21 @@ async function safeJson(res) {
   }
 }
 
-// Fetch all students
+// Fetch all trains
 export async function apiGetAllTrain() {
   const res = await fetch(API_URL);
   if (!res.ok) return [];
   return safeJson(res);
 }
 
-// // Fetch one student by ID
+// // Fetch one train by ID
 export async function apiGetOneTrain(id) {
   const res = await fetch(`${API_URL}/${id}`);
   if (!res.ok) return null;
   return safeJson(res);
 }
 
-// // Create a new student
+// // Create a new train
 export function apiCreateTrain(data) {
   return fetch(API_URL, {
     method: "POST",
@@ -33,7 +33,7 @@ export function apiCreateTrain(data) {
   });
 }
 
-// // Update a student
+// // Update a train
 export function apiUpdateTrain(id, data) {
   return fetch(`${API_URL}/${id}`, {
     method: "PUT",
@@ -42,7 +42,7 @@ export function apiUpdateTrain(id, data) {
   });
 }
 
-// // Delete a student
+// // Delete a train
 export function apiDeleteTrain(id) {
   return fetch(`${API_URL}/${id}`, { method: "DELETE" });
 }

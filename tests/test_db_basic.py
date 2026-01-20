@@ -28,7 +28,7 @@ class TestDatabaseBasics(unittest.TestCase):
         - the test should fail immediately
         """
 
-        # Check: does 'students.db' file exist?
+        # Check: does 'trains.db' file exist?
         self.assertTrue(
             os.path.exists("railway.db"),
             "railway.db file is missing"

@@ -1,4 +1,5 @@
 import { $ } from "../utils/dom.js";
+import { setState } from "../state/store.js";
 
 export function resetBookingForm() {
   $("BookingForm").reset();
@@ -12,6 +13,9 @@ export function fillBookingForm(booking) {
   $("booking_date").value = booking.booking_date ?? "";
   $("total_seats").value = booking.total_seats ?? "";
   $("payment").value = booking.payment ?? "";
+
+
   $("cancelBtn").classList.remove("hidden");
   $("submitBtn").textContent = "Update Booking";
+  setState({ editingBookingId: booking.id});
 }
