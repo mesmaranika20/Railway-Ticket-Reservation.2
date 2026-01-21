@@ -29,7 +29,7 @@ export function initStaffController() {
     // Collect data from the input fields using the custom '$' selector
     const data = {
       name: $("name").value.trim(),   // Get name value, remove whitespace
-      role: $("role").value.trim(), // Get email value
+      role: $("role").value.trim(), // Get source value
       contact: $("contact").value.trim(), // Get age value
     };
 
