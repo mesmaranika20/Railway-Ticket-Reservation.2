@@ -1,7 +1,11 @@
-const API_URL = `${BASE}/bookings`;
+const API_URL = "/api/bookings";
 
 async function safeJson(res) {
-  try { return await res.json(); } catch (_)  { return null; }
+  try {
+    return await res.json();
+  } catch (_) {
+    return null;
+  }
 }
 
 export async function apiGetAllBooking() {
@@ -20,7 +24,7 @@ export function apiCreateBooking(data) {
   return fetch(API_URL, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(data)
+    body: JSON.stringify(data),
   });
 }
 
@@ -28,7 +32,7 @@ export function apiUpdateBooking(id, data) {
   return fetch(`${API_URL}/${id}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(data)
+    body: JSON.stringify(data),
   });
 }
 

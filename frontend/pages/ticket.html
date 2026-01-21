@@ -3,11 +3,11 @@
   <!-- Header -->
   <div class="flex items-center justify-between mb-6">
     <div>
-      <h1 class="text-3xl font-bold">TRAIN INFO</h1>
-      <p class="text-sm text-gray-600">Personal details and enrolled courses</p>
+      <h1 class="text-3xl font-bold">Booking Ticket</h1>
+      <p class="text-sm text-gray-600">Personal details and reserved Booking</p>
     </div>
 
-    <a href="/infos" data-link
+    <a href="/tickets" data-link
       class="inline-flex items-center gap-2 px-4 py-2 rounded bg-blue-600 text-white text-sm hover:bg-blue-700">
       ← Back to Directory
     </a>
@@ -32,56 +32,51 @@
 
         <div id="basicDetails" class="hidden space-y-4">
           <div class="border rounded p-3 bg-gray-50">
-            <div class="text-xs text-gray-500"></div>
-            <div class="font-semibold text-gray-900" id="BookingId">—</div>
+            <div class="text-xs text-gray-500">Train ID</div>
+            <div class="font-semibold text-gray-900" id="trainId">—</div>
           </div>
 
           <div class="border rounded p-3 bg-gray-50">
             <div class="text-xs text-gray-500">Name</div>
-            <div class="font-semibold text-gray-900" id="PassengerName">—</div>
+            <div class="font-semibold text-gray-900" id="trainName">—</div>
           </div>
 
           <div class="border rounded p-3 bg-gray-50">
-            <div class="text-xs text-gray-500">Email</div>
-            <div class="font-semibold text-gray-900" id="Train_Coach">—</div>
+            <div class="text-xs text-gray-500">Source</div>
+            <div class="font-semibold text-gray-900" id="trainSource">—</div>
           </div>
 
           <div class="border rounded p-3 bg-gray-50">
-            <div class="text-xs text-gray-500">Year</div>
-            <div class="font-semibold text-gray-900" id="Booking_Date">—</div>
-          </div>
-          
-           <div class="border rounded p-3 bg-gray-50">
-            <div class="text-xs text-gray-500">Year</div>
-            <div class="font-semibold text-gray-900" id="Total Booking">—</div>
+            <div class="text-xs text-gray-500">Destination</div>
+            <div class="font-semibold text-gray-900" id="trainDestination">—</div>
           </div>
 
 <div class="mt-4 bg-blue-50 border border-blue-200 rounded p-3 text-sm">
-  <div class="font-semibold text-blue-700">Total Bookings</div>
+  <div class="font-semibold text-blue-700">Total Reservations</div>
   <div class="text-blue-900 font-bold">
-    <span id="totalpayment">0</span>
+    <span id="totalReservations">0</span>
   </div>
 </div>
         </div>
       </div>
     </div>
 
-    <!-- RIGHT: Receipts -->
+    <!-- RIGHT: Enrollments -->
     <div class="lg:col-span-2 bg-white rounded shadow border overflow-hidden">
 <div class="p-4 border-b flex items-start justify-between gap-4">
   <div>
-    <h2 class="font-semibold text-lg">receipt Billings</h2>
-    <p class="text-sm text-gray-600">Booking + PassengerName + Coach + total + total Payment</p>
+    <h2 class="font-semibold text-lg">Reserved Booking</h2>
+    <p class="text-sm text-gray-600">passengername + coach + bookingdate + totalseat + payment</p>
   </div>
 
   <!-- Export buttons -->
   <div class="flex gap-2">
-    <button id="infoExportCsvBtn"
+    <button id="ticketExportCsvBtn"
       class="px-3 py-1.5 text-sm border rounded bg-white hover:bg-gray-50">
       Export CSV
     </button>
 
-    <button id="infoExportPdfBtn"
+    <button id="ticketExportPdfBtn"
       class="px-3 py-1.5 text-sm border rounded bg-white hover:bg-gray-50">
       Export PDF
     </button>
@@ -98,21 +93,22 @@
           <table class="min-w-full text-left border">
             <thead class="bg-gray-200">
               <tr>
-                <th class="px-3 py-2">Passenger ID</th>
-                <th class="px-3 py-2">Paseenger Name</th>
-                <th class="px-3 py-2">StaffID</th>
+                <th class="px-3 py-2">reserved ID</th>
+                <th class="px-3 py-2">passengername</th>
+                <th class="px-3 py-2">Coach</th>
+                <th class="px-3 py-2">BookingDate</th>
+                <th class="px-3 py-2">totalseat</th>
+                <th class="px-3 py-2">payment</th>
                 <th class="px-3 py-2">StaffName</th>
-                <th class="px-3 py-2">Price</th>
-                <th class="px-3 py-2">Total item</th>
-                <th class="px-3 py-2">Total amount</th>
-                <th class="px-3 py-2">receipt On</th>
+                <th class="px-3 py-2">role</th>
+                <th class="px-3 py-2">reserved On</th>
               </tr>
             </thead>
             <tbody id="joinTableBody"></tbody>
           </table>
 
-          <p id="noEnrollments" class="text-center text-gray-500 mt-3 hidden">
-            No enrollments found for this train.
+          <p id="noReservations" class="text-center text-gray-500 mt-3 hidden">
+            No reservations found for this student.
           </p>
         </div>
       </div>
@@ -121,8 +117,4 @@
   </div>
 
   <div id="alertContainer" class="fixed top-4 right-4 space-y-2 z-50"></div>
-
 </div>
-=======
-</div>
-

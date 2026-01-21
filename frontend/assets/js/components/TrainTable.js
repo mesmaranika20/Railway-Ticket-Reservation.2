@@ -2,28 +2,28 @@
 import { $ } from "../utils/dom.js";
 import { editTrain, deleteTrainAction } from "../controllers/trainsController.js";
 
-// Renders the list of trains into an HTML table
+// Renders the list of students into an HTML table
 export function renderTrainTable(trains) {
-  // Get references to the table body where rows will be inserted and the 'no trains' message
+  // Get references to the table body where rows will be inserted and the 'no students' message
   const body = $("TrainsTableBody");
   const noTrains = $("noTrains");
 
   // Clear any existing rows from the table body before rendering new data
   body.innerHTML = "";
 
-  // Check if the train array is empty
+  // Check if the student array is empty
   if (trains.length === 0) {
-    // If no trains are found, display the 'no trains' message and stop execution
+    // If no students are found, display the 'no students' message and stop execution
     noTrains.style.display = "block";
     return;
   }
 
-  // If trains exist, hide the 'no trains' message
+  // If students exist, hide the 'no students' message
   noTrains.style.display = "none";
 
-  // Iterate over each train object in the provided array
+  // Iterate over each student object in the provided array
   trains.forEach((train) => {
-    // Create a new table row element for the current train
+    // Create a new table row element for the current student
     const row = document.createElement("tr");
     row.className = "border-b"; // Add styling class (likely Tailwind CSS)
 

@@ -2,9 +2,9 @@
 import { $ } from "../utils/dom.js";
 import { editStaff, deleteStaffAction } from "../controllers/staffController.js";
 
-// Renders the list of trains into an HTML table
+// Renders the list of students into an HTML table
 export function renderStaffTable(staffs) {
-  // Get references to the table body where rows will be inserted and the 'no trains' message
+  // Get references to the table body where rows will be inserted and the 'no students' message
   const body = $("StaffTableBody");
   const empty = $("noStaffs");
   
@@ -13,7 +13,7 @@ export function renderStaffTable(staffs) {
   // Clear any existing rows from the table body before rendering new data
   body.innerHTML = "";
 
-  // Check if the train array is empty
+  // Check if the student array is empty
  if (!staffs || staffs.length === 0) {
     empty.classList.remove("hidden");
     return;
