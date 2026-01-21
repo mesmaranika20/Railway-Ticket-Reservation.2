@@ -1,7 +1,7 @@
 
 // LOAD A VIEW INTO TO LOAD #APP CONTRAINER
 async function loadView(path) {
-  const res = await fetch(path);
+const res = await fetch(path);
 
   // If the view file is missing, show 404 view
   if (!res.ok) {
@@ -14,13 +14,13 @@ async function loadView(path) {
   document.querySelector("#app").innerHTML = html;
 
   // If Mermaid is available, re-render diagrams after HTML injection
-  if (window.mermaid) {
-    try {
-      await window.mermaid.run({ querySelector: "#app .mermaid" });
-    } catch (e) {
-      console.warn("Mermaid render skipped:", r);
-    }
-  }
+//   if (window.mermaid) {
+//     try {
+//       await window.mermaid.run({ querySelector: "#app .mermaid" });
+//     } catch (e) {
+//       console.warn("Mermaid render skipped:", r);
+//     }
+//   }
 }
 
 export async function router() {
@@ -37,7 +37,6 @@ export async function router() {
    if (path === "/trains") {
     await loadView("/frontend/pages/trains.html");
     const mod = await import("../controllers/trainsController.js");
-
     mod.initTrainsController();
     return;
   }
@@ -87,16 +86,14 @@ export async function router() {
     mod.initTicketsController();
     return;
   }
-  if (path.startWith("/tickets/")) {
+  if (path.startsWith("/tickets/")) {
     const idStr = path.split("/")[2]; // "/tickets/1" -> "1"
-
-    mod.initTicketsController();
-    return;
-  }
-  if (path.startWith("/tickets/")) {
-    const idStr = path.split("/")[2]; // "/ts/1" -> "1"
-
     const id = Number(idStr);
+   
+  
+  
+
+    
    if (!Number.isInteger(id)) {
      await loadView("/frontend/pages/404.html");
       return;
