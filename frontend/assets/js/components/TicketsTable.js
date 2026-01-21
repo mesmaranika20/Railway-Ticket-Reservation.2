@@ -1,71 +1,47 @@
-// frontend/assets/js/components/ticketView.js
+// frontend/assets/js/components/ticketsTable.js
 import { $ } from "../utils/dom.js";
 
-function show(id, yes) {
-  const el = $(id);
-  if (!el) return;
-  el.classList[yes ? "remove" : "add"]("hidden");
-}
+export function renderTicketsTable(trains) {
+  const body = $("ticketsTableBody");
+  const noTickets = $("noTickets");
 
-function setText(id, value) {
-  const el = $(id);
-  if (el) el.textContent = value ?? "";
-}
+  if (!body) return;
 
-export function setTicketLoading(isLoading) {
-  // Basic
-  show("basicLoading", isLoading);
-  show("basicDetails", !isLoading);
+  body.innerHTML = "";
 
-  // Enrollments
-  show("joinLoading", isLoading);
-  show("joinTableContainer", !isLoading);
-}
-
-export function renderTrainBasic(train) {
-  setText("trainId", train?.id ?? "—");
-  setText("trainName", train?.train_name ?? "—");
-  setText("trainSource", train?.source ?? "—");
-  setText("trainDestination", train?.destination ?? "—");
-  setText("trainDapartureTime", train?.destination_time ?? "—");
-  setText("trainArrivalTime", train?.arrival_time ?? "—");
-}
-
-export function renderReservationCount(count) {
-  const totalEl = $("totalReservations");
-  if (totalEl) totalEl.textContent = `Total: ${count ?? 0}`;
-}
-
-export function renderReservationsTable(rows) {
-  const body = $("joinTableBody");
-  if (body) body.innerHTML = "";
-
-  if (!rows || rows.length === 0) {
-    show("noReservations", true);
+  if (!trains || trains.length === 0) {
+    if (noTickets) noTickets.style.display = "block";
     return;
   }
 
-  show("noReservations", false);
+  if (noTickets) noTickets.style.display = "none";
 
-  rows.forEach((r) => {
+  trains.forEach((t) => {
     const tr = document.createElement("tr");
     tr.className = "border-b";
+
     tr.innerHTML = `
-      <td class="px-3 py-2">${r.reservation_id ?? "-"}</td>
-      <td class="px-3 py-2">${r.passenger_name ?? "-"}</td>
-      <td class="px-3 py-2">${r.coach_number?? r.coach ?? "-"}</td>
-      <td class="px-3 py-2">${r.booking_date ?? "-"}</td>
-      <td class="px-3 py-2">${r.total_seats ?? "-"}</td>
-      <td class="px-3 py-2">${r.payment ?? "-"}</td>
-      <td class="px-3 py-2">${r.name ?? "-"}</td>
-      <td class="px-3 py-2">${r.role ?? "-"}</td>
-      <td class="px-3 py-2">${r.reserved_on ?? "-"}</td>
+      <td class="px-3 py-2">${t.id}</td>
+
+      <td class="px-3 py-2">
+        <a href="/tickets/${t.id}" data-link class="text-blue-600 hover:underline font-medium">
+          ${t.train_name}
+        </a>
+      </td>
+
+      <td class="px-3 py-2">${t.source}</td>
+      <td class="px-3 py-2">${t.destination}</td>
+      <td class="px-3 py-2">${t.departure_time}</td>
+      <td class="px-3 py-2">${t.arrival_time}</td>
+
+      <td class="px-3 py-2">
+        <a href="/tickets/${t.id}" data-link
+          class="inline-flex items-center justify-center px-3 py-1 rounded bg-blue-600 text-white hover:bg-blue-700">
+          View
+        </a>
+      </td>
     `;
+
     body.appendChild(tr);
   });
-}
-
-export function renderTicketError() {
-  setTLoading(false);
-  renderReservationCount(0);
 }

@@ -52,13 +52,13 @@ export function renderReservationsTable(rows) {
     tr.className = "border-b";
     tr.innerHTML = `
       <td class="px-3 py-2">${r.reservation_id ?? "-"}</td>
-      <td class="px-3 py-2">${r.passenger_name ?? "-"}</td>
-      <td class="px-3 py-2">${r.coach_number?? r.coach ?? "-"}</td>
-      <td class="px-3 py-2">${r.booking_date ?? "-"}</td>
-      <td class="px-3 py-2">${r.total_seats ?? "-"}</td>
-      <td class="px-3 py-2">${r.payment ?? "-"}</td>
-      <td class="px-3 py-2">${r.name ?? "-"}</td>
-      <td class="px-3 py-2">${r.role ?? "-"}</td>
+      <td class="px-3 py-2">${r.booking_passenger_name ?? "-"}</td>
+      <td class="px-3 py-2">${r.booking_coach_number ?? r.coach ?? "-"}</td>
+      <td class="px-3 py-2">${r.booking_booking_date ?? "-"}</td>
+      <td class="px-3 py-2">${r.booking_total_seats ?? "-"}</td>
+      <td class="px-3 py-2">${r.booking_payment ?? "-"}</td>
+      <td class="px-3 py-2">${r.staff_name ?? "-"}</td>
+      <td class="px-3 py-2">${r.staff_role ?? "-"}</td>
       <td class="px-3 py-2">${r.reserved_on ?? "-"}</td>
     `;
     body.appendChild(tr);
