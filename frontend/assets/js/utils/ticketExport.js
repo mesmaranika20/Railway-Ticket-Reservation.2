@@ -10,12 +10,11 @@ function esc(v) {
 
 export const TICKET_CSV_COLUMNS = [
   { key: "reservation_id", label: "Reservation ID" },
-  { key: "train_name", label: "TrainName" },
   { key: "booking_passenger_name", label: "PassengerName" },
-  { key: "booking_coach_number", label: "Coach" },
+  { key: "coach_number", label: "Coach" },
   { key: "booking_date", label: "BookingDate" },
-  { key: "total_seats", label: "Total" },
-  { key: "payment", label: "Payment" },
+  { key: "booking_total_seats", label: "Total" },
+  { key: "booking_payment", label: "Payment" },
   { key: "staff_name", label: "Staff" },
   { key: "staff_role", label: "StaffRole" },
   { key: "reserved_on", label: "Reserved On" },
@@ -25,12 +24,11 @@ export function normalizeTicketRows(rows) {
   // keep it consistent even if backend keys vary slightly
   return (rows || []).map((r) => ({
     reservation_id: r.reservation_id ?? r.id ?? "",
-    train_name: r.train_name ?? "",
     booking_passenger_name: r.booking_passenger_name ?? r.name ?? "",
-    booking_coach_number: r.booking_coach_number ?? "",
+    coach_numbe: r.coach_number ?? r.coach ?? "",
     booking_date: r.booking_date ?? "",
-    total_seats: r.total_seats ?? "",
-    payment: r.payment ?? "",
+    booking_total_seats: r.booking_total_seats ?? "",
+    booking_payment: r.booking_payment ?? "",
     staff_name: r.staff_name ?? "",
    staff_role: r.staff_role ?? "",
    reserved_on: r.reserved_on ?? "",
@@ -62,11 +60,13 @@ export function buildTicketPDFHtml(train, rows) {
       <thead>
         <tr>
           <th>Reserved ID</th>
-          <th>Passenger Name</th>
-          <th>coach</th>
-          <th>Date</th>
-          <th>TotalSeat</th>
+          <th>PassengerName </th>
+          <th>Coach</th>
+          <th>BookingDate</th>
+          <th>Total</th>
           <th>Payment</th>
+          <th>Staff</th>
+          <th>StaffRole</th>
           <th>Reserved On</th>
         </tr>
       </thead>
@@ -80,15 +80,17 @@ export function buildTicketPDFHtml(train, rows) {
             <td>${esc(r.reservation_id)}</td>
             <td>${esc(r.booking_passenger_name)}</td>
             <td>${esc(r.booking_coach_number)}</td>
-            <td>${esc(r.booking_date)}</td>
-            <td>${esc(r.total_seats)}</td>
-            <td>${esc(r.payment)}</td>
+            <td>${esc(r.r.booking_booking_coach_numbe)}</td>
+            <td>${esc(r.booking_total_seats)}</td>
+            <td>${esc(r.booking_payment)}</td>
+            <td>${esc(r.staff_name)}</td>
+            <td>${esc(r.staff_role)}</td>
             <td>${esc(r.reserved_on)}</td>
           </tr>
         `
                 )
                 .join("")
-            : `<tr><td colspan="7">No reservations found.</td></tr>`
+            : `<tr><td colspan="9">No reservations found.</td></tr>`
         }
       </tbody>
     </table>

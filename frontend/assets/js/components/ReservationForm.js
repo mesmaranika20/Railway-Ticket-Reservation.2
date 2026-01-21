@@ -12,7 +12,7 @@ export function fillReservationDropdowns(trains, bookings, staff) {
   (trains || []).forEach(t => {
     const opt = document.createElement("option");
     opt.value = t.id;
-    opt.textContent = `${t.name} (ID: ${t.id})`;
+    opt.textContent = `${t.train_name} (ID: ${t.id})`;
     trainSel.appendChild(opt);
   });
 
