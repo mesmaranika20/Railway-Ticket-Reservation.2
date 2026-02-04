@@ -58,7 +58,7 @@ function getRows() {
   const sortKey = $("sortBy")?.value ?? "id";
   const sortDir = $("sortDir")?.value ?? "asc";
 
-  const filtered = filterList(allTrains, q, ["id", "name", "source", "destination", "departure_time", "arrival_time"]);
+  const filtered = filterList(allTrains, q, ["id", "train_name", "source", "destination", "departure_time", "arrival_time"]);
   return sortList(filtered, sortKey, sortDir);
 }
 
