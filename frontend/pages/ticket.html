@@ -1,120 +1,179 @@
-<div class="max-w-6xl mx-auto p-6">
-
-  <!-- Header -->
-  <div class="flex items-center justify-between mb-6">
-    <div>
-      <h1 class="text-3xl font-bold">Booking Ticket</h1>
-      <p class="text-sm text-gray-600">Personal details and reserved Booking</p>
-    </div>
-
-    <a href="/tickets" data-link
-      class="inline-flex items-center gap-2 px-4 py-2 rounded bg-blue-600 text-white text-sm hover:bg-blue-700">
-      ← Back to Directory
-    </a>
+<div class="booking-page-wrapper min-h-screen py-12 px-4 relative overflow-hidden">
     
-  </div>
-
-  <!-- MAIN GRID (fills space properly) -->
-  <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-
-    <!-- LEFT: Basic Details -->
-    <div class="lg:col-span-1 bg-white rounded shadow border overflow-hidden">
-      <div class="p-4 border-b">
-        <h2 class="font-semibold text-lg">Basic Details</h2>
-        <p class="text-sm text-gray-600">Booking information</p>
-      </div>
-
-      <div class="p-4">
-        <div id="basicLoading" class="text-center py-6">
-          <div class="animate-spin rounded-full h-6 w-6 border-b-2 border-blue-500 mx-auto"></div>
-          <p class="text-sm text-gray-500 mt-2">Loading...</p>
+    <div class="scenic-bg">
+        <div class="hill hill-1"></div>
+        <div class="bullet-train-container">
+            <div class="bullet-train">
+                <div class="train-head"></div>
+                <div class="speed-lines"></div>
+            </div>
         </div>
-
-        <div id="basicDetails" class="hidden space-y-4">
-          <div class="border rounded p-3 bg-gray-50">
-            <div class="text-xs text-gray-500">Train ID</div>
-            <div class="font-semibold text-gray-900" id="trainId">—</div>
-          </div>
-
-          <div class="border rounded p-3 bg-gray-50">
-            <div class="text-xs text-gray-500">Name</div>
-            <div class="font-semibold text-gray-900" id="trainName">—</div>
-          </div>
-
-          <div class="border rounded p-3 bg-gray-50">
-            <div class="text-xs text-gray-500">Source</div>
-            <div class="font-semibold text-gray-900" id="trainSource">—</div>
-          </div>
-
-          <div class="border rounded p-3 bg-gray-50">
-            <div class="text-xs text-gray-500">Destination</div>
-            <div class="font-semibold text-gray-900" id="trainDestination">—</div>
-          </div>
-
-<div class="mt-4 bg-blue-50 border border-blue-200 rounded p-3 text-sm">
-  <div class="font-semibold text-blue-700">Total Reservations</div>
-  <div class="text-blue-900 font-bold">
-    <span id="totalReservations">0</span>
-  </div>
-</div>
-        </div>
-      </div>
     </div>
 
-    <!-- RIGHT: Enrollments -->
-    <div class="lg:col-span-2 bg-white rounded shadow border overflow-hidden">
-<div class="p-4 border-b flex items-start justify-between gap-4">
-  <div>
-    <h2 class="font-semibold text-lg">Reserved Booking</h2>
-    <p class="text-sm text-gray-600">passengername + coach + bookingdate + totalseat + payment</p>
-  </div>
+    <div class="max-w-6xl mx-auto main-wrapper relative z-10">
 
-  <!-- Export buttons -->
-  <div class="flex gap-2">
-    <button id="ticketExportCsvBtn"
-      class="px-3 py-1.5 text-sm border rounded bg-white hover:bg-gray-50">
-      Export CSV
-    </button>
+        <div class="flex items-center justify-between mb-8">
+            <div>
+                <h1 class="text-3xl font-black text-slate-900 tracking-tight drop-shadow-sm">Booking Ticket</h1>
+                <p class="text-sm text-slate-600 mt-1 font-medium">Personal details and reserved Booking</p>
+            </div>
 
-    <button id="ticketExportPdfBtn"
-      class="px-3 py-1.5 text-sm border rounded bg-white hover:bg-gray-50">
-      Export PDF
-    </button>
-  </div>
-</div>
-
-      <div class="p-4">
-        <div id="joinLoading" class="text-center py-6">
-          <div class="animate-spin rounded-full h-6 w-6 border-b-2 border-blue-500 mx-auto"></div>
-          <p class="text-sm text-gray-500 mt-2">Loading...</p>
+            <a href="/tickets" data-link
+                class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-white/60 hover:bg-white/80 text-slate-700 text-sm font-bold transition border border-slate-200 shadow-sm">
+                ← Back to Directory
+            </a>
         </div>
 
-        <div id="joinTableContainer" class="hidden overflow-x-auto">
-          <table class="min-w-full text-left border">
-            <thead class="bg-gray-200">
-              <tr>
-                <th class="px-3 py-2">reserved ID</th>
-                <th class="px-3 py-2">passengername</th>
-                <th class="px-3 py-2">Coach</th>
-                <th class="px-3 py-2">BookingDate</th>
-                <th class="px-3 py-2">totalseat</th>
-                <th class="px-3 py-2">payment</th>
-                <th class="px-3 py-2">StaffName</th>
-                <th class="px-3 py-2">role</th>
-                <th class="px-3 py-2">reserved On</th>
-              </tr>
-            </thead>
-            <tbody id="joinTableBody"></tbody>
-          </table>
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
 
-          <p id="noReservations" class="text-center text-gray-500 mt-3 hidden">
-            No reservations found for this student.
-          </p>
+            <div class="lg:col-span-1 bg-white/40 backdrop-blur-md rounded-2xl border border-white shadow-lg overflow-hidden">
+                <div class="p-4 border-b border-blue-200/30">
+                    <h2 class="font-bold text-lg text-slate-800">Basic Details</h2>
+                    <p class="text-xs text-slate-500 font-medium">Booking information</p>
+                </div>
+
+                <div class="p-4">
+                    <div id="basicLoading" class="text-center py-6">
+                        <div class="animate-spin rounded-full h-6 w-6 border-b-2 border-blue-600 mx-auto"></div>
+                        <p class="text-sm text-slate-500 mt-2">Loading...</p>
+                    </div>
+
+                    <div id="basicDetails" class="hidden space-y-4">
+                        <div class="border border-blue-100 rounded-xl p-3 bg-white/60">
+                            <div class="text-[10px] uppercase tracking-wider font-bold text-blue-500">Train ID</div>
+                            <div class="font-bold text-slate-900" id="trainId">—</div>
+                        </div>
+
+                        <div class="border border-blue-100 rounded-xl p-3 bg-white/60">
+                            <div class="text-[10px] uppercase tracking-wider font-bold text-blue-500">Name</div>
+                            <div class="font-bold text-slate-900" id="trainName">—</div>
+                        </div>
+
+                        <div class="border border-blue-100 rounded-xl p-3 bg-white/60">
+                            <div class="text-[10px] uppercase tracking-wider font-bold text-blue-500">Source</div>
+                            <div class="font-bold text-slate-900" id="trainSource">—</div>
+                        </div>
+
+                        <div class="border border-blue-100 rounded-xl p-3 bg-white/60">
+                            <div class="text-[10px] uppercase tracking-wider font-bold text-blue-500">Destination</div>
+                            <div class="font-bold text-slate-900" id="trainDestination">—</div>
+                        </div>
+
+                        <div class="mt-4 bg-blue-50 border border-blue-200 rounded-xl p-3 text-sm">
+                            <div class="font-semibold text-blue-700">Total Reservations</div>
+                            <div class="text-blue-900 font-bold">
+                                <span id="totalReservations">0</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lg:col-span-2 bg-white/40 backdrop-blur-md rounded-2xl border border-white shadow-lg overflow-hidden">
+                <div class="p-4 border-b border-blue-200/30 flex items-start justify-between gap-4">
+                    <div>
+                        <h2 class="font-bold text-lg text-slate-800">Reserved Booking</h2>
+                        <p class="text-xs text-slate-500 font-medium">passengername + coach + bookingdate + totalseat + payment</p>
+                    </div>
+
+                    <div class="flex gap-2">
+                        <button id="ticketExportCsvBtn"
+                            class="px-3 py-1.5 text-xs font-bold border border-slate-200 rounded-lg bg-white/80 hover:bg-white text-slate-700 transition shadow-sm">
+                            Export CSV
+                        </button>
+
+                        <button id="ticketExportPdfBtn"
+                            class="px-3 py-1.5 text-xs font-bold border border-slate-200 rounded-lg bg-white/80 hover:bg-white text-slate-700 transition shadow-sm">
+                            Export PDF
+                        </button>
+                    </div>
+                </div>
+
+                <div class="p-4">
+                    <div id="joinLoading" class="text-center py-6">
+                        <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto"></div>
+                        <p class="text-sm text-slate-500 mt-2">Loading...</p>
+                    </div>
+
+                    <div id="joinTableContainer" class="hidden overflow-x-auto rounded-xl border border-blue-100 bg-white/50">
+                        <table class="min-w-full text-left">
+                            <thead class="bg-blue-50/50">
+                                <tr>
+                                    <th class="px-3 py-2 text-xs font-bold text-blue-700">reserved ID</th>
+                                    <th class="px-3 py-2 text-xs font-bold text-blue-700">passengername</th>
+                                    <th class="px-3 py-2 text-xs font-bold text-blue-700">Coach</th>
+                                    <th class="px-3 py-2 text-xs font-bold text-blue-700">BookingDate</th>
+                                    <th class="px-3 py-2 text-xs font-bold text-blue-700">totalseat</th>
+                                    <th class="px-3 py-2 text-xs font-bold text-blue-700">payment</th>
+                                    <th class="px-3 py-2 text-xs font-bold text-blue-700">StaffName</th>
+                                    <th class="px-3 py-2 text-xs font-bold text-blue-700">role</th>
+                                    <th class="px-3 py-2 text-xs font-bold text-blue-700">reserved On</th>
+                                </tr>
+                            </thead>
+                            <tbody id="joinTableBody" class="divide-y divide-blue-50 text-slate-700 text-sm"></tbody>
+                        </table>
+
+                        <p id="noReservations" class="text-center text-slate-500 py-8 hidden font-medium">
+                            No reservations found for this student.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
         </div>
-      </div>
+
+        <div id="alertContainer" class="fixed top-4 right-4 space-y-2 z-50"></div>
     </div>
-
-  </div>
-
-  <div id="alertContainer" class="fixed top-4 right-4 space-y-2 z-50"></div>
 </div>
+
+<style>
+    .booking-page-wrapper {
+        background: linear-gradient(180deg, #e0f2fe 0%, #bae6fd 100%);
+        background-attachment: fixed;
+    }
+
+    .scenic-bg {
+        position: fixed;
+        bottom: 0; left: 0; width: 100%; height: 60vh;
+        z-index: 0; pointer-events: none;
+    }
+
+    .hill {
+        position: absolute; bottom: 0; width: 200%; height: 100%;
+        background-repeat: repeat-x; opacity: 0.6;
+    }
+
+    .hill-1 {
+        background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%237dd3fc" d="M0,160L80,176C160,192,320,224,480,213.3C640,203,800,149,960,144C1120,139,1280,181,1360,202.7L1440,224L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z"></path></svg>');
+        animation: moveHill 60s linear infinite;
+        bottom: -50px;
+    }
+
+    .bullet-train-container {
+        position: absolute; bottom: 120px; width: 100%; height: 2px;
+        background: rgba(3, 105, 161, 0.1);
+    }
+
+    .bullet-train {
+        position: absolute; top: -15px; left: -500px;
+        display: flex; align-items: center;
+        animation: highSpeedPass 12s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+    }
+
+    .train-head {
+        width: 70px; height: 20px;
+        background: #0284c7;
+        border-radius: 50% 12px 3px 3px;
+    }
+
+    .speed-lines {
+        width: 120px; height: 15px;
+        background: linear-gradient(90deg, transparent, rgba(2, 132, 199, 0.2));
+        margin-left: -5px;
+    }
+
+    @keyframes moveHill { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    @keyframes highSpeedPass { 0% { transform: translateX(-100%); } 30%, 100% { transform: translateX(200vw); } }
+
+    #joinTableBody tr:hover { background: rgba(255, 255, 255, 0.5); }
+</style>
