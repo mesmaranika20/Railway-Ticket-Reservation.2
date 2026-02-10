@@ -80,7 +80,7 @@ export function buildTicketPDFHtml(train, rows) {
             <td>${esc(r.reservation_id)}</td>
             <td>${esc(r.booking_passenger_name)}</td>
             <td>${esc(r.booking_coach_number)}</td>
-            <td>${esc(r.r.booking_booking_coach_numbe)}</td>
+            
             <td>${esc(r.booking_total_seats)}</td>
             <td>${esc(r.booking_payment)}</td>
             <td>${esc(r.staff_name)}</td>
